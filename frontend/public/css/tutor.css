@@ -1,0 +1,403 @@
+/**
+ * Estilos específicos para a área do tutor do sistema Amor Pet
+ * 
+ * Este arquivo contém os estilos CSS para as páginas da área do tutor,
+ * seguindo a paleta de cores definida e garantindo responsividade.
+ */
+
+/* Variáveis de cores (repetidas do styles.css para garantir consistência) */
+:root {
+  --primary: #A8D5BA;     /* Verde-água */
+  --secondary: #B3D4E5;   /* Azul claro */
+  --neutral: #F5E8C7;     /* Bege */
+  --accent: #F4A261;      /* Laranja suave */
+  --white: #FFFFFF;
+  --dark: #333333;
+  --light-gray: #F8F9FA;
+  --gray: #6C757D;
+  --success: #28a745;
+  --warning: #ffc107;
+  --danger: #dc3545;
+}
+
+/* Estilos gerais da área do tutor */
+.tutor-dashboard {
+  background-color: var(--light-gray);
+  min-height: calc(100vh - 76px - 300px); /* Altura da viewport menos cabeçalho e rodapé */
+  padding: 30px 0;
+}
+
+.welcome-section {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.welcome-section h1 {
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+/* Cards de agendamento */
+.appointment-card {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.appointment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-date {
+  background-color: var(--secondary);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  min-width: 70px;
+  margin-right: 15px;
+}
+
+.appointment-date .day {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.appointment-date .month {
+  display: block;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.appointment-info {
+  flex: 1;
+}
+
+.appointment-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.appointment-info p {
+  margin-bottom: 5px;
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+.appointment-info .status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.status.confirmed {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success);
+}
+
+.status.pending {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning);
+}
+
+.status.cancelled {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger);
+}
+
+/* Card para novo agendamento */
+.new-appointment {
+  background-color: var(--white);
+  border: 2px dashed #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.new-appointment-content {
+  padding: 20px;
+}
+
+.new-appointment i {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.new-appointment h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.new-appointment p {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+/* Cards de planos */
+.plan-card {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.plan-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.plan-progress {
+  margin-bottom: 15px;
+}
+
+.plan-progress .progress {
+  height: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.plan-progress .progress-bar {
+  background-color: var(--primary);
+}
+
+.plan-status {
+  font-size: 0.9rem;
+  color: var(--dark);
+  font-weight: 600;
+}
+
+.plan-expiry {
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+
+/* Card para novo plano */
+.new-plan {
+  background-color: var(--white);
+  border: 2px dashed #dee2e6;
+  text-align: center;
+}
+
+.new-plan i {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.new-plan h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.new-plan p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+/* Cards de pets */
+.pet-card {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  height: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.pet-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.pet-image {
+  height: 150px;
+  overflow: hidden;
+}
+
+.pet-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pet-info {
+  padding: 15px;
+}
+
+.pet-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.pet-info p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+/* Card para novo pet */
+.new-pet {
+  background-color: var(--white);
+  border: 2px dashed #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+
+.new-pet-content {
+  padding: 20px;
+}
+
+.new-pet i {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.new-pet h3 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.new-pet p {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+/* Formulários */
+.form-section {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.form-section h2 {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.25rem rgba(168, 213, 186, 0.25);
+}
+
+.photo-upload {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.photo-preview {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto 15px;
+  border: 2px dashed #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-gray);
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-preview i {
+  font-size: 3rem;
+  color: var(--gray);
+}
+
+/* Detalhes do pet */
+.pet-details {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.pet-details-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-right: 30px;
+}
+
+.pet-details-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pet-details-info {
+  flex: 1;
+}
+
+.pet-details-info h2 {
+  margin-bottom: 15px;
+}
+
+.pet-details-info .info-item {
+  margin-bottom: 10px;
+}
+
+.pet-details-info .info-label {
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 991px) {
+  .pet-details {
+    flex-direction: column;
+  }
+  
+  .pet-details-image {
+    width: 100%;
+    max-width: 300px;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .form-section {
+    padding: 20px;
+  }
+  
+  .appointment-card, .plan-card, .pet-card {
+    margin-bottom: 20px;
+  }
+}

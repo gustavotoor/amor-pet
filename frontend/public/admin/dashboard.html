@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Administração Amor Pet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../images/logo.svg" alt="Amor Pet" class="logo">
+        <h1>Administração</h1>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active">
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="agendamentos.html"><i class="fas fa-calendar-alt"></i> Agendamentos</a>
+          </li>
+          <li>
+            <a href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+          </li>
+          <li>
+            <a href="servicos.html"><i class="fas fa-concierge-bell"></i> Serviços</a>
+          </li>
+          <li>
+            <a href="planos.html"><i class="fas fa-tags"></i> Planos</a>
+          </li>
+          <li>
+            <a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
+          </li>
+          <li>
+            <a href="configuracoes.html"><i class="fas fa-cog"></i> Configurações</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="admin-content">
+      <header class="content-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h2>Dashboard</h2>
+        </div>
+        <div class="header-right">
+          <div class="admin-profile">
+            <span id="adminName">Admin</span>
+            <img src="../images/admin-avatar.png" alt="Admin" class="avatar">
+          </div>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- Cards de Estatísticas -->
+        <div class="row stats-cards">
+          <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card stat-card">
+              <div class="card-body">
+                <div class="stat-icon bg-primary">
+                  <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="stat-details">
+                  <h3 class="stat-title">Agendamentos Hoje</h3>
+                  <p class="stat-value" id="appointmentsToday">8</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card stat-card">
+              <div class="card-body">
+                <div class="stat-icon bg-success">
+                  <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-details">
+                  <h3 class="stat-title">Receita do Mês</h3>
+                  <p class="stat-value" id="monthlyRevenue">R$ 4.850,00</p>
+                  <span class="stat-change positive">+12% <i class="fas fa-arrow-up"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card stat-card">
+              <div class="card-body">
+                <div class="stat-icon bg-info">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-details">
+                  <h3 class="stat-title">Total de Clientes</h3>
+                  <p class="stat-value" id="totalClients">124</p>
+                  <span class="stat-change positive">+5 novos</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card stat-card">
+              <div class="card-body">
+                <div class="stat-icon bg-warning">
+                  <i class="fas fa-paw"></i>
+                </div>
+                <div class="stat-details">
+                  <h3 class="stat-title">Total de Pets</h3>
+                  <p class="stat-value" id="totalPets">187</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gráficos -->
+        <div class="row">
+          <div class="col-lg-8 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h3>Agendamentos por Mês</h3>
+              </div>
+              <div class="card-body">
+                <canvas id="appointmentsChart" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h3>Serviços Realizados</h3>
+              </div>
+              <div class="card-body">
+                <canvas id="servicesChart" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Próximos Agendamentos -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h3>Próximos Agendamentos</h3>
+                <a href="agendamentos.html" class="btn btn-sm btn-outline-primary">Ver Todos</a>
+              </div>
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Cliente</th>
+                        <th>Pet</th>
+                        <th>Serviço</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody id="upcomingAppointments">
+                      <tr>
+                        <td>24/04/2025</td>
+                        <td>14:00</td>
+                        <td>Maria Silva</td>
+                        <td>Rex (Labrador)</td>
+                        <td>Banho</td>
+                        <td><span class="badge bg-success">Confirmado</span></td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <a href="agendamento-detalhe.html?id=1" class="btn btn-outline-primary"><i class="fas fa-eye"></i></a>
+                            <button class="btn btn-outline-success complete-btn" data-id="1"><i class="fas fa-check"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>24/04/2025</td>
+                        <td>15:30</td>
+                        <td>João Pereira</td>
+                        <td>Luna (Siamês)</td>
+                        <td>Banho e Tosa</td>
+                        <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <a href="agendamento-detalhe.html?id=2" class="btn btn-outline-primary"><i class="fas fa-eye"></i></a>
+                            <button class="btn btn-outline-success confirm-btn" data-id="2"><i class="fas fa-check"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>24/04/2025</td>
+                        <td>16:00</td>
+                        <td>Ana Oliveira</td>
+                        <td>Thor (Golden Retriever)</td>
+                        <td>Banho</td>
+                        <td><span class="badge bg-success">Confirmado</span></td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <a href="agendamento-detalhe.html?id=3" class="btn btn-outline-primary"><i class="fas fa-eye"></i></a>
+                            <button class="btn btn-outline-success complete-btn" data-id="3"><i class="fas fa-check"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>25/04/2025</td>
+                        <td>09:00</td>
+                        <td>Carlos Santos</td>
+                        <td>Mel (Poodle)</td>
+                        <td>Banho e Tosa</td>
+                        <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <a href="agendamento-detalhe.html?id=4" class="btn btn-outline-primary"><i class="fas fa-eye"></i></a>
+                            <button class="btn btn-outline-success confirm-btn" data-id="4"><i class="fas fa-check"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>25/04/2025</td>
+                        <td>10:30</td>
+                        <td>Fernanda Lima</td>
+                        <td>Nina (Persa)</td>
+                        <td>Banho</td>
+                        <td><span class="badge bg-success">Confirmado</span></td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <a href="agendamento-detalhe.html?id=5" class="btn btn-outline-primary"><i class="fas fa-eye"></i></a>
+                            <button class="btn btn-outline-success complete-btn" data-id="5"><i class="fas fa-check"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Clientes Recentes e Atividades -->
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h3>Clientes Recentes</h3>
+                <a href="clientes.html" class="btn btn-sm btn-outline-primary">Ver Todos</a>
+              </div>
+              <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="user-info">
+                      <img src="../images/user-avatar.png" alt="Usuário" class="avatar-sm">
+                      <div>
+                        <h4>Maria Silva</h4>
+                        <p class="text-muted">maria.silva@email.com</p>
+                      </div>
+                    </div>
+                    <span class="badge bg-primary rounded-pill">2 pets</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="user-info">
+                      <img src="../images/user-avatar.png" alt="Usuário" class="avatar-sm">
+                      <div>
+                        <h4>João Pereira</h4>
+                        <p class="text-muted">joao.pereira@email.com</p>
+                      </div>
+                    </div>
+                    <span class="badge bg-primary rounded-pill">1 pet</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="user-info">
+                      <img src="../images/user-avatar.png" alt="Usuário" class="avatar-sm">
+                      <div>
+                        <h4>Ana Oliveira</h4>
+                        <p class="text-muted">ana.oliveira@email.com</p>
+                      </div>
+                    </div>
+                    <span class="badge bg-primary rounded-pill">3 pets</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="user-info">
+                      <img src="../images/user-avatar.png" alt="Usuário" class="avatar-sm">
+                      <div>
+                        <h4>Carlos Santos</h4>
+                        <p class="text-muted">carlos.santos@email.com</p>
+                      </div>
+                    </div>
+                    <span class="badge bg-primary rounded-pill">1 pet</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="user-info">
+                      <img src="../images/user-avatar.png" alt="Usuário" class="avatar-sm">
+                      <div>
+                        <h4>Fernanda Lima</h4>
+                        <p class="text-muted">fernanda.lima@email.com</p>
+                      </div>
+                    </div>
+                    <span class="badge bg-primary rounded-pill">2 pets</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h3>Atividades Recentes</h3>
+              </div>
+              <div class="card-body p-0">
+                <ul class="activity-list">
+                  <li class="activity-item">
+                    <div class="activity-icon bg-success">
+                      <i class="fas fa-check"></i>
+                    </div>
+                    <div class="activity-content">
+                      <p class="activity-text">Agendamento #123 concluído</p>
+                      <p class="activity-time">Hoje, 10:30</p>
+                    </div>
+                  </li>
+                  <li class="activity-item">
+                    <div class="activity-icon bg-primary">
+                      <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="activity-content">
+                      <p class="activity-text">Novo cliente cadastrado: Fernanda Lima</p>
+                      <p class="activity-time">Hoje, 09:15</p>
+                    </div>
+                  </li>
+                  <li class="activity-item">
+                    <div class="activity-icon bg-warning">
+                      <i class="fas fa-calendar-plus"></i>
+                    </div>
+                    <div class="activity-content">
+                      <p class="activity-text">Novo agendamento: João Pereira</p>
+                      <p class="activity-time">Ontem, 16:45</p>
+                    </div>
+                  </li>
+                  <li class="activity-item">
+                    <div class="activity-icon bg-info">
+                      <i class="fas fa-tag"></i>
+                    </div>
+                    <div class="activity-content">
+                      <p class="activity-text">Plano adquirido: Maria Silva</p>
+                      <p class="activity-time">Ontem, 14:20</p>
+                    </div>
+                  </li>
+                  <li class="activity-item">
+                    <div class="activity-icon bg-success">
+                      <i class="fas fa-check"></i>
+                    </div>
+                    <div class="activity-content">
+                      <p class="activity-text">Agendamento #122 concluído</p>
+                      <p class="activity-time">Ontem, 11:10</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal de Confirmação -->
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmModalLabel">Confirmar Ação</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body" id="confirmModalBody">
+          Tem certeza que deseja realizar esta ação?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="confirmModalBtn">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle sidebar
+      document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.querySelector('.admin-layout').classList.toggle('sidebar-collapsed');
+      });
+      
+      // Logout button
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        // Em um sistema real, aqui seria feito o logout
+        window.location.href = '../login.html';
+      });
+      
+      // Inicializar gráficos
+      initCharts();
+      
+      // Configurar botões de ação
+      setupActionButtons();
+    });
+    
+    function initCharts() {
+      // Gráfico de Agendamentos por Mês
+      const appointmentsCtx = document.getElementById('appointmentsChart').getContext('2d');
+      const appointmentsChart = new Chart(appointmentsCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+          datasets: [{
+            label: 'Agendamentos',
+            data: [65, 78, 90, 85, 92, 110],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 2,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+      
+      // Gráfico de Serviços Realizados
+      const servicesCtx = document.getElementById('servicesChart').getContext('2d');
+      const servicesChart = new Chart(servicesCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Banho', 'Banho e Tosa'],
+          datasets: [{
+            data: [65, 35],
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.7)',
+              'rgba(255, 159, 64, 0.7)'
+            ],
+            borderColor: [
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      });
+    }
+    
+    function setupActionButtons() {
+      // Botões de confirmar agendamento
+      document.querySelectorAll('.confirm-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const appointmentId = this.getAttribute('data-id');
+          
+          // Configurar modal
+          document.getElementById('confirmModalLabel').textContent = 'Confirmar Agendamento';
+          document.getElementById('confirmModalBody').textContent = `Tem certeza que deseja confirmar o agendamento #${appointmentId}?`;
+          
+          // Configurar botão de confirmação
+          const confirmBtn = document.getElementById('confirmModalBtn');
+          confirmBtn.className = 'btn btn-success';
+          confirmBtn.textContent = 'Confirmar';
+          
+          // Ação ao confirmar
+          confirmBtn.onclick = function() {
+            // Em um sistema real, aqui seria feita a requisição para a API
+            // para confirmar o agendamento
+            
+            // Exemplo:
+            // updateAppointmentStatus(appointmentId, 'confirmed');
+            
+            // Fechar o modal
+            bootstrap.Modal.getInstance(document.getElementById('confirmModal')).hide();
+            
+            // Atualizar a interface (simulação)
+            alert(`Agendamento #${appointmentId} confirmado com sucesso!`);
+          };
+          
+          // Abrir o modal
+          new bootstrap.Modal(document.getElementById('confirmModal')).show();
+        });
+      });
+      
+      // Botões de concluir agendamento
+      document.querySelectorAll('.complete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const appointmentId = this.getAttribute('data-id');
+          
+          // Configurar modal
+          document.getElementById('confirmModalLabel').textContent = 'Concluir Agendamento';
+          document.getElementById('confirmModalBody').textContent = `Tem certeza que deseja marcar o agendamento #${appointmentId} como concluído?`;
+          
+          // Configurar botão de confirmação
+          const confirmBtn = document.getElementById('confirmModalBtn');
+          confirmBtn.className = 'btn btn-success';
+          confirmBtn.textContent = 'Concluir';
+          
+          // Ação ao confirmar
+          confirmBtn.onclick = function() {
+            // Em um sistema real, aqui seria feita a requisição para a API
+            // para concluir o agendamento
+            
+            // Exemplo:
+            // updateAppointmentStatus(appointmentId, 'completed');
+            
+            // Fechar o modal
+            bootstrap.Modal.getInstance(document.getElementById('confirmModal')).hide();
+            
+            // Atualizar a interface (simulação)
+            alert(`Agendamento #${appointmentId} concluído com sucesso!`);
+          };
+          
+          // Abrir o modal
+          new bootstrap.Modal(document.getElementById('confirmModal')).show();
+        });
+      });
+    }
+    
+    // Função para atualizar status de agendamento (em um sistema real)
+    function updateAppointmentStatus(appointmentId, status) {
+      fetch(`/api/admin/appointments/${appointmentId}/status`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify({ status })
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao atualizar status do agendamento');
+        }
+      })
+      .then(data => {
+        alert(data.message);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para obter token (em um sistema real)
+    function getToken() {
+      return localStorage.getItem('token');
+    }
+  </script>
+</body>
+</html>

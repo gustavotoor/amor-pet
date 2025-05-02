@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planos - Amor Pet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/tutor.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html">
+            <img src="../images/logo.svg" alt="Amor Pet" class="logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pets.html">Meus Pets</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="agendamentos.html">Agendamentos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="planos.html">Planos</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-user-circle"></i> <span id="userName">Usuário</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="perfil.html">Meu Perfil</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#" id="logoutBtn">Sair</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="tutor-dashboard">
+    <div class="container py-5">
+      <h1 class="mb-4">Planos de Economia</h1>
+      
+      <!-- Meus Planos -->
+      <div class="card mb-5">
+        <div class="card-header">
+          <h2 class="h5 mb-0">Meus Planos</h2>
+        </div>
+        <div class="card-body">
+          <div id="myPlans">
+            <!-- Será preenchido via JavaScript -->
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="plan-card active">
+                  <div class="plan-header">
+                    <h3>Plano 4 Banhos</h3>
+                    <span class="badge bg-success">Ativo</span>
+                  </div>
+                  <div class="plan-body">
+                    <div class="plan-info">
+                      <p><strong>Serviços disponíveis:</strong> 2 de 4</p>
+                      <p><strong>Validade:</strong> 24/07/2025</p>
+                      <div class="progress mb-3">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                      </div>
+                    </div>
+                    <div class="plan-actions">
+                      <a href="agendar.html" class="btn btn-primary">Agendar Serviço</a>
+                      <a href="plano-detalhe.html?id=1" class="btn btn-outline-secondary">Ver Detalhes</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-4">
+                <div class="plan-card expired">
+                  <div class="plan-header">
+                    <h3>Plano 2 Banhos e Tosas</h3>
+                    <span class="badge bg-secondary">Expirado</span>
+                  </div>
+                  <div class="plan-body">
+                    <div class="plan-info">
+                      <p><strong>Serviços disponíveis:</strong> 0 de 2</p>
+                      <p><strong>Validade:</strong> 10/03/2025 (expirado)</p>
+                      <div class="progress mb-3">
+                        <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                      </div>
+                    </div>
+                    <div class="plan-actions">
+                      <a href="plano-detalhe.html?id=2" class="btn btn-outline-secondary">Ver Detalhes</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="noPlans" class="text-center py-4 d-none">
+            <div class="empty-state">
+              <i class="fas fa-ticket-alt fa-3x mb-3 text-muted"></i>
+              <h3>Você ainda não possui planos</h3>
+              <p class="text-muted">Adquira um plano abaixo e economize nos serviços para seu pet</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Planos Disponíveis -->
+      <h2 class="mb-4">Adquira um Plano</h2>
+      <div class="row" id="availablePlans">
+        <!-- Será preenchido via JavaScript -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card plan-purchase-card">
+            <div class="card-header text-center">
+              <h3 class="plan-title">Plano 4 Banhos</h3>
+            </div>
+            <div class="card-body">
+              <div class="plan-price text-center mb-3">
+                <span class="original-price">R$ 200,00</span>
+                <span class="current-price">R$ 180,00</span>
+                <span class="discount-badge">-10%</span>
+              </div>
+              <ul class="plan-features">
+                <li><i class="fas fa-check"></i> 4 banhos para seu pet</li>
+                <li><i class="fas fa-check"></i> Economize R$ 20,00</li>
+                <li><i class="fas fa-check"></i> Validade de 3 meses</li>
+                <li><i class="fas fa-check"></i> Agendamento prioritário</li>
+              </ul>
+            </div>
+            <div class="card-footer text-center">
+              <button class="btn btn-primary btn-lg buy-plan" data-id="1" data-bs-toggle="modal" data-bs-target="#confirmPlanModal">Adquirir Plano</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card plan-purchase-card featured">
+            <div class="ribbon">Mais Popular</div>
+            <div class="card-header text-center">
+              <h3 class="plan-title">Plano 2 Banhos e Tosas</h3>
+            </div>
+            <div class="card-body">
+              <div class="plan-price text-center mb-3">
+                <span class="original-price">R$ 160,00</span>
+                <span class="current-price">R$ 136,00</span>
+                <span class="discount-badge">-15%</span>
+              </div>
+              <ul class="plan-features">
+                <li><i class="fas fa-check"></i> 2 banhos com tosa</li>
+                <li><i class="fas fa-check"></i> Economize R$ 24,00</li>
+                <li><i class="fas fa-check"></i> Validade de 2 meses</li>
+                <li><i class="fas fa-check"></i> Agendamento prioritário</li>
+              </ul>
+            </div>
+            <div class="card-footer text-center">
+              <button class="btn btn-primary btn-lg buy-plan" data-id="2" data-bs-toggle="modal" data-bs-target="#confirmPlanModal">Adquirir Plano</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card plan-purchase-card">
+            <div class="card-header text-center">
+              <h3 class="plan-title">Plano 6 Banhos</h3>
+            </div>
+            <div class="card-body">
+              <div class="plan-price text-center mb-3">
+                <span class="original-price">R$ 300,00</span>
+                <span class="current-price">R$ 240,00</span>
+                <span class="discount-badge">-20%</span>
+              </div>
+              <ul class="plan-features">
+                <li><i class="fas fa-check"></i> 6 banhos para seu pet</li>
+                <li><i class="fas fa-check"></i> Economize R$ 60,00</li>
+                <li><i class="fas fa-check"></i> Validade de 4 meses</li>
+                <li><i class="fas fa-check"></i> Agendamento prioritário</li>
+              </ul>
+            </div>
+            <div class="card-footer text-center">
+              <button class="btn btn-primary btn-lg buy-plan" data-id="3" data-bs-toggle="modal" data-bs-target="#confirmPlanModal">Adquirir Plano</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Modal de Confirmação de Compra de Plano -->
+  <div class="modal fade" id="confirmPlanModal" tabindex="-1" aria-labelledby="confirmPlanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmPlanModalLabel">Confirmar Compra do Plano</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="plan-summary mb-4">
+                <h4 id="modalPlanTitle">Plano 4 Banhos</h4>
+                <p class="plan-price" id="modalPlanPrice">R$ 180,00</p>
+                <div id="modalPlanDetails">
+                  <p><strong>Serviços incluídos:</strong> 4 banhos</p>
+                  <p><strong>Validade:</strong> 3 meses</p>
+                  <p><strong>Economia:</strong> R$ 20,00</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="payment-options">
+                <h4>Forma de Pagamento</h4>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="radio" name="paymentMethod" id="paymentPix" value="pix" checked>
+                  <label class="form-check-label" for="paymentPix">
+                    Pagar com Pix
+                  </label>
+                </div>
+                
+                <div class="pix-payment" id="pixPayment">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <h5 class="card-title">Pagamento via Pix</h5>
+                      <div class="qr-code-container my-3">
+                        <img src="../images/pix-qrcode.png" alt="QR Code Pix" class="img-fluid" style="max-width: 200px;">
+                      </div>
+                      <button type="button" class="btn btn-sm btn-outline-primary copy-pix-key">
+                        <i class="fas fa-copy"></i> Copiar chave Pix
+                      </button>
+                      <p class="text-muted mt-3 small">O plano será ativado após a confirmação do pagamento</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success" id="confirmPurchase">Confirmar Compra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="../images/logo.svg" alt="Amor Pet" class="footer-logo">
+          <p>Cuidando do seu pet com amor e carinho.</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Links Rápidos</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html#servicos">Serviços</a></li>
+            <li><a href="../index.html#planos">Planos</a></li>
+            <li><a href="../index.html#como-funciona">Como Funciona</a></li>
+            <li><a href="../index.html#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4>Redes Sociais</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p class="copyright">© 2025 Amor Pet - Todos os direitos reservados</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Verificar se o usuário está autenticado
+      if (!AuthService.isAuthenticated()) {
+        window.location.href = '../login.html';
+        return;
+      }
+      
+      // Obter dados do usuário
+      const user = AuthService.getCurrentUser();
+      
+      // Preencher nome do usuário
+      document.getElementById('userName').textContent = user.name.split(' ')[0];
+      
+      // Configurar botão de logout
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        AuthService.logout();
+      });
+      
+      // Em um sistema real, aqui seria feita a requisição para a API
+      // para buscar os planos do usuário e os planos disponíveis
+      
+      // Exemplo:
+      // fetchUserPlans();
+      // fetchAvailablePlans();
+      
+      // Configurar botões de compra de plano
+      document.querySelectorAll('.buy-plan').forEach(button => {
+        button.addEventListener('click', function() {
+          const planId = this.getAttribute('data-id');
+          
+          // Em um sistema real, aqui seria feita a requisição para a API
+          // para buscar os detalhes do plano selecionado
+          
+          // Simulação de dados do plano
+          let planTitle, planPrice, planDetails;
+          
+          switch (planId) {
+            case '1':
+              planTitle = 'Plano 4 Banhos';
+              planPrice = 'R$ 180,00';
+              planDetails = `
+                <p><strong>Serviços incluídos:</strong> 4 banhos</p>
+                <p><strong>Validade:</strong> 3 meses</p>
+                <p><strong>Economia:</strong> R$ 20,00</p>
+              `;
+              break;
+            case '2':
+              planTitle = 'Plano 2 Banhos e Tosas';
+              planPrice = 'R$ 136,00';
+              planDetails = `
+                <p><strong>Serviços incluídos:</strong> 2 banhos com tosa</p>
+                <p><strong>Validade:</strong> 2 meses</p>
+                <p><strong>Economia:</strong> R$ 24,00</p>
+              `;
+              break;
+            case '3':
+              planTitle = 'Plano 6 Banhos';
+              planPrice = 'R$ 240,00';
+              planDetails = `
+                <p><strong>Serviços incluídos:</strong> 6 banhos</p>
+                <p><strong>Validade:</strong> 4 meses</p>
+                <p><strong>Economia:</strong> R$ 60,00</p>
+              `;
+              break;
+          }
+          
+          // Preencher modal com dados do plano
+          document.getElementById('modalPlanTitle').textContent = planTitle;
+          document.getElementById('modalPlanPrice').textContent = planPrice;
+          document.getElementById('modalPlanDetails').innerHTML = planDetails;
+          
+          // Armazenar ID do plano para uso na confirmação
+          document.getElementById('confirmPurchase').setAttribute('data-plan-id', planId);
+        });
+      });
+      
+      // Copiar chave Pix
+      document.querySelector('.copy-pix-key').addEventListener('click', function() {
+        navigator.clipboard.writeText('amorpet@exemplo.com')
+          .then(() => {
+            alert('Chave Pix copiada!');
+          })
+          .catch(err => {
+            console.error('Erro ao copiar chave Pix:', err);
+          });
+      });
+      
+      // Confirmar compra do plano
+      document.getElementById('confirmPurchase').addEventListener('click', function() {
+        const planId = this.getAttribute('data-plan-id');
+        
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // para adquirir o plano
+        
+        // Exemplo:
+        // purchasePlan(planId);
+        
+        // Simulação de compra bem-sucedida
+        alert('Plano adquirido com sucesso! Você receberá um e-mail de confirmação assim que o pagamento for processado.');
+        
+        // Fechar o modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('confirmPlanModal'));
+        modal.hide();
+        
+        // Redirecionar para a página de planos
+        window.location.reload();
+      });
+    });
+    
+    // Função para buscar planos do usuário (em um sistema real)
+    function fetchUserPlans() {
+      fetch('/api/plans/purchased', {
+        headers: {
+          'Authorization': `Bearer ${AuthService.getToken()}`
+        }
+      })
+      .then(response => response.json())
+      .then(plans => {
+        renderUserPlans(plans);
+      })
+      .catch(error => console.error('Erro ao buscar planos do usuário:', error));
+    }
+    
+    // Função para renderizar planos do usuário (em um sistema real)
+    function renderUserPlans(plans) {
+      const myPlansContainer = document.getElementById('myPlans');
+      const noPlansContainer = document.getElementById('noPlans');
+      
+      if (plans.length === 0) {
+        myPlansContainer.classList.add('d-none');
+        noPlansContainer.classList.remove('d-none');
+        return;
+      }
+      
+      myPlansContainer.classList.remove('d-none');
+      noPlansContainer.classList.add('d-none');
+      
+      myPlansContainer.innerHTML = '<div class="row"></div>';
+      const row = myPlansContainer.querySelector('.row');
+      
+      plans.forEach(plan => {
+        // Calcular porcentagem de uso
+        const usedPercentage = (plan.used_services / plan.total_services) * 100;
+        
+        // Formatar data de expiração
+        const expiryDate = new Date(plan.expiry_date);
+        const formattedExpiryDate = expiryDate.toLocaleDateString('pt-BR');
+        
+        // Verificar se o plano está expirado
+        const isExpired = plan.status === 'expired' || expiryDate < new Date();
+        
+        // Definir classe e texto do status
+        let statusClass = '';
+        let statusText = '';
+        
+        switch (plan.status) {
+          case 'active':
+            statusClass = 'bg-success';
+            statusText = 'Ativo';
+            break;
+          case 'expired':
+            statusClass = 'bg-secondary';
+            statusText = 'Expirado';
+            break;
+          case 'cancelled':
+            statusClass = 'bg-danger';
+            statusText = 'Cancelado';
+            break;
+        }
+        
+        // Criar elemento do plano
+        const planElement = document.createElement('div');
+        planElement.className = 'col-md-6 mb-4';
+        planElement.innerHTML = `
+          <div class="plan-card ${isExpired ? 'expired' : 'active'}">
+            <div class="plan-header">
+              <h3>${plan.plan.name}</h3>
+              <span class="badge ${statusClass}">${statusText}</span>
+            </div>
+            <div class="plan-body">
+              <div class="plan-info">
+                <p><strong>Serviços disponíveis:</strong> ${plan.total_services - plan.used_services} de ${plan.total_services}</p>
+                <p><strong>Validade:</strong> ${formattedExpiryDate}${isExpired ? ' (expirado)' : ''}</p>
+                <div class="progress mb-3">
+                  <div class="progress-bar ${isExpired ? 'bg-secondary' : 'bg-success'}" role="progressbar" style="width: ${usedPercentage}%" aria-valuenow="${usedPercentage}" aria-valuemin="0" aria-valuemax="100">${Math.round(usedPercentage)}%</div>
+                </div>
+              </div>
+              <div class="plan-actions">
+                ${!isExpired ? `<a href="agendar.html" class="btn btn-primary">Agendar Serviço</a>` : ''}
+                <a href="plano-detalhe.html?id=${plan.id}" class="btn btn-outline-secondary">Ver Detalhes</a>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        row.appendChild(planElement);
+      });
+    }
+    
+    // Função para buscar planos disponíveis (em um sistema real)
+    function fetchAvailablePlans() {
+      fetch('/api/plans/active', {
+        headers: {
+          'Authorization': `Bearer ${AuthService.getToken()}`
+        }
+      })
+      .then(response => response.json())
+      .then(plans => {
+        renderAvailablePlans(plans);
+      })
+      .catch(error => console.error('Erro ao buscar planos disponíveis:', error));
+    }
+    
+    // Função para renderizar planos disponíveis (em um sistema real)
+    function renderAvailablePlans(plans) {
+      const availablePlansContainer = document.getElementById('availablePlans');
+      availablePlansContainer.innerHTML = '';
+      
+      plans.forEach((plan, index) => {
+        // Calcular desconto
+        const originalPrice = plan.price * 1.1; // Simulação de preço original
+        const discount = ((originalPrice - plan.price) / originalPrice) * 100;
+        
+        // Formatar preços
+        const formattedOriginalPrice = originalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const formattedPrice = plan.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        
+        // Criar elemento do plano
+        const planElement = document.createElement('div');
+        planElement.className = 'col-md-6 col-lg-4 mb-4';
+        planElement.innerHTML = `
+          <div class="card plan-purchase-card ${index === 1 ? 'featured' : ''}">
+            ${index === 1 ? '<div class="ribbon">Mais Popular</div>' : ''}
+            <div class="card-header text-center">
+              <h3 class="plan-title">${plan.name}</h3>
+            </div>
+            <div class="card-body">
+              <div class="plan-price text-center mb-3">
+                <span class="original-price">${formattedOriginalPrice}</span>
+                <span class="current-price">${formattedPrice}</span>
+                <span class="discount-badge">-${Math.round(discount)}%</span>
+              </div>
+              <ul class="plan-features">
+                ${plan.description.split('\n').map(item => `<li><i class="fas fa-check"></i> ${item}</li>`).join('')}
+              </ul>
+            </div>
+            <div class="card-footer text-center">
+              <button class="btn btn-primary btn-lg buy-plan" data-id="${plan.id}" data-bs-toggle="modal" data-bs-target="#confirmPlanModal">Adquirir Plano</button>
+            </div>
+          </div>
+        `;
+        
+        availablePlansContainer.appendChild(planElement);
+      });
+      
+      // Adicionar eventos aos novos botões de compra
+      document.querySelectorAll('.buy-plan').forEach(button => {
+        button.addEventListener('click', function() {
+          const planId = this.getAttribute('data-id');
+          // Lógica para preencher o modal...
+        });
+      });
+    }
+    
+    // Função para adquirir plano (em um sistema real)
+    function purchasePlan(planId) {
+      fetch('/api/plans/purchase', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${AuthService.getToken()}`
+        },
+        body: JSON.stringify({ plan_id: planId })
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return response.json().then(data => {
+            throw new Error(data.message || 'Erro ao adquirir plano');
+          });
+        }
+      })
+      .then(data => {
+        alert('Plano adquirido com sucesso! Você receberá um e-mail de confirmação assim que o pagamento for processado.');
+        window.location.reload();
+      })
+      .catch(error => {
+        alert(error.message);
+        console.error('Erro ao adquirir plano:', error);
+      });
+    }
+  </script>
+</body>
+</html>

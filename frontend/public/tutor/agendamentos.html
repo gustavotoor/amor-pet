@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meus Agendamentos - Amor Pet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/tutor.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html">
+            <img src="../images/logo.svg" alt="Amor Pet" class="logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pets.html">Meus Pets</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="agendamentos.html">Agendamentos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="planos.html">Planos</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-user-circle"></i> <span id="userName">Usuário</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="perfil.html">Meu Perfil</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#" id="logoutBtn">Sair</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="tutor-dashboard">
+    <div class="container py-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Meus Agendamentos</h1>
+        <a href="agendar.html" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Novo Agendamento
+        </a>
+      </div>
+      
+      <!-- Filtros -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <form id="filterForm" class="row g-3">
+            <div class="col-md-3">
+              <label for="filterPet" class="form-label">Pet</label>
+              <select class="form-select" id="filterPet">
+                <option value="">Todos</option>
+                <option value="1">Rex</option>
+                <option value="2">Luna</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="filterStatus" class="form-label">Status</label>
+              <select class="form-select" id="filterStatus">
+                <option value="">Todos</option>
+                <option value="pending">Pendentes</option>
+                <option value="confirmed">Confirmados</option>
+                <option value="completed">Concluídos</option>
+                <option value="cancelled">Cancelados</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="filterStartDate" class="form-label">Data Inicial</label>
+              <input type="date" class="form-control" id="filterStartDate">
+            </div>
+            <div class="col-md-3">
+              <label for="filterEndDate" class="form-label">Data Final</label>
+              <input type="date" class="form-control" id="filterEndDate">
+            </div>
+            <div class="col-12 text-end">
+              <button type="button" class="btn btn-outline-secondary me-2" id="clearFilters">Limpar</button>
+              <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Lista de Agendamentos -->
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Horário</th>
+              <th>Pet</th>
+              <th>Serviço</th>
+              <th>Status</th>
+              <th>Pagamento</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="appointmentsTable">
+            <!-- Será preenchido via JavaScript -->
+            <tr>
+              <td>25/04/2025</td>
+              <td>14:00</td>
+              <td>Rex</td>
+              <td>Banho</td>
+              <td><span class="badge bg-success">Confirmado</span></td>
+              <td><span class="badge bg-success">Pago</span></td>
+              <td>
+                <a href="agendamento-detalhe.html?id=1" class="btn btn-sm btn-outline-primary">Ver</a>
+              </td>
+            </tr>
+            <tr>
+              <td>30/04/2025</td>
+              <td>10:30</td>
+              <td>Luna</td>
+              <td>Banho e Tosa</td>
+              <td><span class="badge bg-warning text-dark">Pendente</span></td>
+              <td><span class="badge bg-warning text-dark">Pendente</span></td>
+              <td>
+                <a href="agendamento-detalhe.html?id=2" class="btn btn-sm btn-outline-primary">Ver</a>
+                <button class="btn btn-sm btn-outline-danger cancel-appointment" data-id="2" data-bs-toggle="modal" data-bs-target="#cancelModal">Cancelar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>10/03/2025</td>
+              <td>09:00</td>
+              <td>Rex</td>
+              <td>Banho</td>
+              <td><span class="badge bg-secondary">Concluído</span></td>
+              <td><span class="badge bg-success">Pago</span></td>
+              <td>
+                <a href="agendamento-detalhe.html?id=3" class="btn btn-sm btn-outline-primary">Ver</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Paginação -->
+      <nav aria-label="Navegação de página" class="mt-4">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Próximo</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <!-- Modal de Confirmação de Cancelamento -->
+      <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="cancelModalLabel">Confirmar Cancelamento</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+              <p>Tem certeza que deseja cancelar este agendamento?</p>
+              <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i> Agendamentos para hoje ou amanhã não podem ser cancelados pelo sistema. Entre em contato com o pet shop.
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+              <button type="button" class="btn btn-danger" id="confirmCancel">Cancelar Agendamento</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="../images/logo.svg" alt="Amor Pet" class="footer-logo">
+          <p>Cuidando do seu pet com amor e carinho.</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Links Rápidos</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html#servicos">Serviços</a></li>
+            <li><a href="../index.html#planos">Planos</a></li>
+            <li><a href="../index.html#como-funciona">Como Funciona</a></li>
+            <li><a href="../index.html#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4>Redes Sociais</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p class="copyright">© 2025 Amor Pet - Todos os direitos reservados</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Verificar se o usuário está autenticado
+      if (!AuthService.isAuthenticated()) {
+        window.location.href = '../login.html';
+        return;
+      }
+      
+      // Obter dados do usuário
+      const user = AuthService.getCurrentUser();
+      
+      // Preencher nome do usuário
+      document.getElementById('userName').textContent = user.name.split(' ')[0];
+      
+      // Configurar botão de logout
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        AuthService.logout();
+      });
+      
+      // Em um sistema real, aqui seria feita a requisição para a API
+      // para buscar os agendamentos do usuário
+      
+      // Exemplo:
+      // fetchAppointments();
+      
+      // Configurar formulário de filtro
+      document.getElementById('filterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // com os filtros aplicados
+        
+        // Exemplo:
+        // const filters = {
+        //   pet_id: document.getElementById('filterPet').value,
+        //   status: document.getElementById('filterStatus').value,
+        //   start_date: document.getElementById('filterStartDate').value,
+        //   end_date: document.getElementById('filterEndDate').value
+        // };
+        // 
+        // fetchAppointments(filters);
+        
+        // Simulação de filtro aplicado
+        alert('Filtros aplicados!');
+      });
+      
+      // Limpar filtros
+      document.getElementById('clearFilters').addEventListener('click', function() {
+        document.getElementById('filterPet').value = '';
+        document.getElementById('filterStatus').value = '';
+        document.getElementById('filterStartDate').value = '';
+        document.getElementById('filterEndDate').value = '';
+      });
+      
+      // Configurar modal de cancelamento
+      let appointmentIdToCancel = null;
+      
+      document.querySelectorAll('.cancel-appointment').forEach(button => {
+        button.addEventListener('click', function() {
+          appointmentIdToCancel = this.getAttribute('data-id');
+        });
+      });
+      
+      document.getElementById('confirmCancel').addEventListener('click', function() {
+        if (appointmentIdToCancel) {
+          // Em um sistema real, aqui seria feita a requisição para a API
+          // para cancelar o agendamento
+          
+          // Exemplo:
+          // cancelAppointment(appointmentIdToCancel);
+          
+          // Simulação de cancelamento bem-sucedido
+          alert('Agendamento cancelado com sucesso!');
+          window.location.reload();
+        }
+        
+        // Fechar o modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('cancelModal'));
+        modal.hide();
+      });
+    });
+    
+    // Função para buscar agendamentos (em um sistema real)
+    function fetchAppointments(filters = {}) {
+      // Construir URL com filtros
+      let url = '/api/appointments';
+      const queryParams = [];
+      
+      if (filters.pet_id) {
+        queryParams.push(`pet_id=${filters.pet_id}`);
+      }
+      
+      if (filters.status) {
+        queryParams.push(`status=${filters.status}`);
+      }
+      
+      if (filters.start_date) {
+        queryParams.push(`start_date=${filters.start_date}`);
+      }
+      
+      if (filters.end_date) {
+        queryParams.push(`end_date=${filters.end_date}`);
+      }
+      
+      if (queryParams.length > 0) {
+        url += '?' + queryParams.join('&');
+      }
+      
+      fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${AuthService.getToken()}`
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        renderAppointments(data);
+      })
+      .catch(error => console.error('Erro ao buscar agendamentos:', error));
+    }
+    
+    // Função para renderizar agendamentos (em um sistema real)
+    function renderAppointments(appointments) {
+      const appointmentsTable = document.getElementById('appointmentsTable');
+      appointmentsTable.innerHTML = '';
+      
+      if (appointments.length === 0) {
+        appointmentsTable.innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center">Nenhum agendamento encontrado</td>
+          </tr>
+        `;
+        return;
+      }
+      
+      appointments.forEach(appointment => {
+        // Formatar data e hora
+        const date = new Date(appointment.appointment_date);
+        const formattedDate = date.toLocaleDateString('pt-BR');
+        const formattedTime = appointment.appointment_time.substring(0, 5);
+        
+        // Definir classe e texto do status
+        let statusClass = '';
+        let statusText = '';
+        
+        switch (appointment.status) {
+          case 'confirmed':
+            statusClass = 'bg-success';
+            statusText = 'Confirmado';
+            break;
+          case 'pending':
+            statusClass = 'bg-warning text-dark';
+            statusText = 'Pendente';
+            break;
+          case 'completed':
+            statusClass = 'bg-secondary';
+            statusText = 'Concluído';
+            break;
+          case 'cancelled':
+            statusClass = 'bg-danger';
+            statusText = 'Cancelado';
+            break;
+        }
+        
+        // Definir classe e texto do status de pagamento
+        let paymentClass = '';
+        let paymentText = '';
+        
+        switch (appointment.payment_status) {
+          case 'paid':
+            paymentClass = 'bg-success';
+            paymentText = 'Pago';
+            break;
+          case 'pending':
+            paymentClass = 'bg-warning text-dark';
+            paymentText = 'Pendente';
+            break;
+          case 'refunded':
+            paymentClass = 'bg-info';
+            paymentText = 'Reembolsado';
+            break;
+        }
+        
+        // Botões de ação
+        let actions = `<a href="agendamento-detalhe.html?id=${appointment.id}" class="btn btn-sm btn-outline-primary">Ver</a>`;
+        
+        // Adicionar botão de cancelamento apenas para agendamentos pendentes ou confirmados
+        if (appointment.status === 'pending' || appointment.status === 'confirmed') {
+          actions += `
+            <button class="btn btn-sm btn-outline-danger cancel-appointment" data-id="${appointment.id}" data-bs-toggle="modal" data-bs-target="#cancelModal">
+              Cancelar
+            </button>
+          `;
+        }
+        
+        appointmentsTable.innerHTML += `
+          <tr>
+            <td>${formattedDate}</td>
+            <td>${formattedTime}</td>
+            <td>${appointment.pet.name}</td>
+            <td>${appointment.service.name}</td>
+            <td><span class="badge ${statusClass}">${statusText}</span></td>
+            <td><span class="badge ${paymentClass}">${paymentText}</span></td>
+            <td>${actions}</td>
+          </tr>
+        `;
+      });
+      
+      // Adicionar eventos aos novos botões de cancelamento
+      document.querySelectorAll('.cancel-appointment').forEach(button => {
+        button.addEventListener('click', function() {
+          appointmentIdToCancel = this.getAttribute('data-id');
+        });
+      });
+    }
+    
+    // Função para cancelar agendamento (em um sistema real)
+    function cancelAppointment(appointmentId) {
+      fetch(`/api/appointments/${appointmentId}/cancel`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${AuthService.getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Agendamento cancelado com sucesso!');
+          window.location.reload();
+        } else {
+          return response.json().then(data => {
+            throw new Error(data.message || 'Erro ao cancelar agendamento');
+          });
+        }
+      })
+      .catch(error => {
+        alert(error.message);
+        console.error('Erro ao cancelar agendamento:', error);
+      });
+    }
+  </script>
+</body>
+</html>

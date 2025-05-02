@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planos - Administração Amor Pet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../images/logo.svg" alt="Amor Pet" class="logo">
+        <h1>Administração</h1>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="agendamentos.html"><i class="fas fa-calendar-alt"></i> Agendamentos</a>
+          </li>
+          <li>
+            <a href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+          </li>
+          <li>
+            <a href="servicos.html"><i class="fas fa-concierge-bell"></i> Serviços</a>
+          </li>
+          <li class="active">
+            <a href="planos.html"><i class="fas fa-tags"></i> Planos</a>
+          </li>
+          <li>
+            <a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
+          </li>
+          <li>
+            <a href="configuracoes.html"><i class="fas fa-cog"></i> Configurações</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="admin-content">
+      <header class="content-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h2>Planos</h2>
+        </div>
+        <div class="header-right">
+          <div class="admin-profile">
+            <span id="adminName">Admin</span>
+            <img src="../images/admin-avatar.png" alt="Admin" class="avatar">
+          </div>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- Botão para adicionar plano -->
+        <div class="d-flex justify-content-end mb-4">
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#planModal">
+            <i class="fas fa-plus"></i> Adicionar Plano
+          </button>
+        </div>
+        
+        <!-- Lista de Planos -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Planos Disponíveis</h3>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Validade (dias)</th>
+                    <th>Serviços</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="plansList">
+                  <tr>
+                    <td>1</td>
+                    <td>Plano 4 Banhos</td>
+                    <td>Pacote com 4 banhos para seu pet com economia de 10%</td>
+                    <td>R$ 180,00</td>
+                    <td>90</td>
+                    <td>Banho (4)</td>
+                    <td><span class="badge bg-success">Ativo</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary edit-btn" data-id="1" data-bs-toggle="modal" data-bs-target="#planModal" title="Editar"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-outline-danger delete-btn" data-id="1" title="Excluir"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Plano 2 Banhos e Tosas</td>
+                    <td>Pacote com 2 banhos e tosas para seu pet com economia de 15%</td>
+                    <td>R$ 136,00</td>
+                    <td>60</td>
+                    <td>Banho e Tosa (2)</td>
+                    <td><span class="badge bg-success">Ativo</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary edit-btn" data-id="2" data-bs-toggle="modal" data-bs-target="#planModal" title="Editar"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-outline-danger delete-btn" data-id="2" title="Excluir"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Plano 6 Banhos</td>
+                    <td>Pacote com 6 banhos para seu pet com economia de 20%</td>
+                    <td>R$ 240,00</td>
+                    <td>120</td>
+                    <td>Banho (6)</td>
+                    <td><span class="badge bg-success">Ativo</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary edit-btn" data-id="3" data-bs-toggle="modal" data-bs-target="#planModal" title="Editar"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-outline-danger delete-btn" data-id="3" title="Excluir"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Plano Premium</td>
+                    <td>Pacote com 4 banhos premium para seu pet com economia de 15%</td>
+                    <td>R$ 238,00</td>
+                    <td>90</td>
+                    <td>Banho Premium (4)</td>
+                    <td><span class="badge bg-secondary">Inativo</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary edit-btn" data-id="4" data-bs-toggle="modal" data-bs-target="#planModal" title="Editar"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-outline-danger delete-btn" data-id="4" title="Excluir"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Planos Adquiridos -->
+        <div class="card mt-4">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Planos Adquiridos</h3>
+            <div class="btn-group">
+              <button class="btn btn-outline-secondary" id="exportBtn">
+                <i class="fas fa-file-export"></i> Exportar
+              </button>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Plano</th>
+                    <th>Data de Compra</th>
+                    <th>Validade</th>
+                    <th>Serviços Usados</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="purchasedPlansList">
+                  <tr>
+                    <td>1</td>
+                    <td>Maria Silva</td>
+                    <td>Plano 4 Banhos</td>
+                    <td>15/03/2025</td>
+                    <td>13/06/2025</td>
+                    <td>2/4</td>
+                    <td><span class="badge bg-success">Ativo</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="plano-adquirido-detalhe.html?id=1" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>João Pereira</td>
+                    <td>Plano 2 Banhos e Tosas</td>
+                    <td>20/03/2025</td>
+                    <td>19/05/2025</td>
+                    <td>1/2</td>
+                    <td><span class="badge bg-success">Ativo</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="plano-adquirido-detalhe.html?id=2" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Ana Oliveira</td>
+                    <td>Plano 6 Banhos</td>
+                    <td>25/03/2025</td>
+                    <td>23/07/2025</td>
+                    <td>3/6</td>
+                    <td><span class="badge bg-success">Ativo</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="plano-adquirido-detalhe.html?id=3" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Carlos Santos</td>
+                    <td>Plano 4 Banhos</td>
+                    <td>01/02/2025</td>
+                    <td>02/05/2025</td>
+                    <td>4/4</td>
+                    <td><span class="badge bg-secondary">Expirado</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="plano-adquirido-detalhe.html?id=4" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <nav aria-label="Paginação de planos adquiridos">
+              <ul class="pagination justify-content-center mb-0">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Próximo</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal de Plano -->
+  <div class="modal fade" id="planModal" tabindex="-1" aria-labelledby="planModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="planModalLabel">Adicionar Plano</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="planForm">
+            <input type="hidden" id="planId">
+            <div class="mb-3">
+              <label for="planName" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="planName" required>
+            </div>
+            <div class="mb-3">
+              <label for="planDescription" class="form-label">Descrição</label>
+              <textarea class="form-control" id="planDescription" rows="3"></textarea>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="planPrice" class="form-label">Preço (R$)</label>
+                <input type="number" class="form-control" id="planPrice" min="0" step="0.01" required>
+              </div>
+              <div class="col-md-6">
+                <label for="planValidity" class="form-label">Validade (dias)</label>
+                <input type="number" class="form-control" id="planValidity" min="1" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Serviços Incluídos</label>
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Serviço</th>
+                      <th>Quantidade</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="planServicesTable">
+                    <tr id="serviceRow-template" style="display: none;">
+                      <td>
+                        <select class="form-select service-select">
+                          <option value="">Selecione um serviço</option>
+                          <option value="1">Banho</option>
+                          <option value="2">Banho e Tosa</option>
+                          <option value="3">Banho Premium</option>
+                        </select>
+                      </td>
+                      <td>
+                        <input type="number" class="form-control service-quantity" min="1" value="1">
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-sm btn-danger remove-service">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="3">
+                        <button type="button" class="btn btn-sm btn-success" id="addServiceBtn">
+                          <i class="fas fa-plus"></i> Adicionar Serviço
+                        </button>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="planActive" checked>
+              <label class="form-check-label" for="planActive">Ativo</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="savePlanBtn">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação -->
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmModalLabel">Confirmar Exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body" id="confirmModalBody">
+          Tem certeza que deseja excluir este plano? Esta ação não pode ser desfeita.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle sidebar
+      document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.querySelector('.admin-layout').classList.toggle('sidebar-collapsed');
+      });
+      
+      // Logout button
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        // Em um sistema real, aqui seria feito o logout
+        window.location.href = '../login.html';
+      });
+      
+      // Dados de planos (simulação)
+      const plans = [
+        {
+          id: 1,
+          name: 'Plano 4 Banhos',
+          description: 'Pacote com 4 banhos para seu pet com economia de 10%',
+          price: 180.00,
+          validity_days: 90,
+          active: true,
+          services: [
+            { id: 1, name: 'Banho', quantity: 4 }
+          ]
+        },
+        {
+          id: 2,
+          name: 'Plano 2 Banhos e Tosas',
+          description: 'Pacote com 2 banhos e tosas para seu pet com economia de 15%',
+          price: 136.00,
+          validity_days: 60,
+          active: true,
+          services: [
+            { id: 2, name: 'Banho e Tosa', quantity: 2 }
+          ]
+        },
+        {
+          id: 3,
+          name: 'Plano 6 Banhos',
+          description: 'Pacote com 6 banhos para seu pet com economia de 20%',
+          price: 240.00,
+          validity_days: 120,
+          active: true,
+          services: [
+            { id: 1, name: 'Banho', quantity: 6 }
+          ]
+        },
+        {
+          id: 4,
+          name: 'Plano Premium',
+          description: 'Pacote com 4 banhos premium para seu pet com economia de 15%',
+          price: 238.00,
+          validity_days: 90,
+          active: false,
+          services: [
+            { id: 3, name: 'Banho Premium', quantity: 4 }
+          ]
+        }
+      ];
+      
+      // Dados de serviços (simulação)
+      const services = [
+        { id: 1, name: 'Banho', price: 50.00 },
+        { id: 2, name: 'Banho e Tosa', price: 80.00 },
+        { id: 3, name: 'Banho Premium', price: 70.00 },
+        { id: 4, name: 'Tosa Higiênica', price: 40.00, active: false }
+      ];
+      
+      // Modal de plano
+      const planModal = document.getElementById('planModal');
+      const planModalLabel = document.getElementById('planModalLabel');
+      const planForm = document.getElementById('planForm');
+      const planId = document.getElementById('planId');
+      const planName = document.getElementById('planName');
+      const planDescription = document.getElementById('planDescription');
+      const planPrice = document.getElementById('planPrice');
+      const planValidity = document.getElementById('planValidity');
+      const planActive = document.getElementById('planActive');
+      const planServicesTable = document.getElementById('planServicesTable');
+      const savePlanBtn = document.getElementById('savePlanBtn');
+      
+      // Adicionar serviço ao plano
+      document.getElementById('addServiceBtn').addEventListener('click', function() {
+        const template = document.getElementById('serviceRow-template');
+        const newRow = template.cloneNode(true);
+        newRow.id = 'serviceRow-' + Date.now();
+        newRow.style.display = '';
+        
+        // Configurar botão de remover serviço
+        newRow.querySelector('.remove-service').addEventListener('click', function() {
+          newRow.remove();
+        });
+        
+        planServicesTable.appendChild(newRow);
+      });
+      
+      // Resetar formulário ao abrir o modal para adicionar
+      planModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
+        
+        // Limpar tabela de serviços
+        const rows = planServicesTable.querySelectorAll('tr:not(#serviceRow-template)');
+        rows.forEach(row => row.remove());
+        
+        // Se não for um botão de edição, é um botão de adicionar
+        if (!button || !button.classList.contains('edit-btn')) {
+          planModalLabel.textContent = 'Adicionar Plano';
+          planForm.reset();
+          planId.value = '';
+          return;
+        }
+        
+        // Se for um botão de edição, preencher o formulário com os dados do plano
+        const id = button.getAttribute('data-id');
+        const plan = plans.find(p => p.id == id);
+        
+        if (plan) {
+          planModalLabel.textContent = 'Editar Plano';
+          planId.value = plan.id;
+          planName.value = plan.name;
+          planDescription.value = plan.description;
+          planPrice.value = plan.price;
+          planValidity.value = plan.validity_days;
+          planActive.checked = plan.active;
+          
+          // Adicionar serviços do plano
+          plan.services.forEach(service => {
+            const template = document.getElementById('serviceRow-template');
+            const newRow = template.cloneNode(true);
+            newRow.id = 'serviceRow-' + service.id;
+            newRow.style.display = '';
+            
+            // Selecionar serviço
+            const serviceSelect = newRow.querySelector('.service-select');
+            serviceSelect.value = service.id;
+            
+            // Definir quantidade
+            const quantityInput = newRow.querySelector('.service-quantity');
+            quantityInput.value = service.quantity;
+            
+            // Configurar botão de remover serviço
+            newRow.querySelector('.remove-service').addEventListener('click', function() {
+              newRow.remove();
+            });
+            
+            planServicesTable.appendChild(newRow);
+          });
+        }
+      });
+      
+      // Salvar plano
+      savePlanBtn.addEventListener('click', function() {
+        // Verificar se o formulário é válido
+        if (!planForm.checkValidity()) {
+          planForm.reportValidity();
+          return;
+        }
+        
+        // Verificar se há pelo menos um serviço
+        const serviceRows = planServicesTable.querySelectorAll('tr:not(#serviceRow-template)');
+        if (serviceRows.length === 0) {
+          alert('Adicione pelo menos um serviço ao plano');
+          return;
+        }
+        
+        // Obter dados do formulário
+        const id = planId.value;
+        const name = planName.value;
+        const description = planDescription.value;
+        const price = parseFloat(planPrice.value);
+        const validity_days = parseInt(planValidity.value);
+        const active = planActive.checked;
+        
+        // Obter serviços do plano
+        const planServices = [];
+        serviceRows.forEach(row => {
+          const serviceId = row.querySelector('.service-select').value;
+          const quantity = parseInt(row.querySelector('.service-quantity').value);
+          
+          if (serviceId && quantity > 0) {
+            const service = services.find(s => s.id == serviceId);
+            if (service) {
+              planServices.push({
+                id: parseInt(serviceId),
+                name: service.name,
+                quantity: quantity
+              });
+            }
+          }
+        });
+        
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // para salvar o plano
+        
+        if (id) {
+          // Editar plano existente
+          // updatePlan(id, { name, description, price, validity_days, active, services: planServices });
+          console.log('Editando plano:', { id, name, description, price, validity_days, active, services: planServices });
+        } else {
+          // Adicionar novo plano
+          // createPlan({ name, description, price, validity_days, active, services: planServices });
+          console.log('Adicionando plano:', { name, description, price, validity_days, active, services: planServices });
+        }
+        
+        // Fechar o modal
+        bootstrap.Modal.getInstance(planModal).hide();
+        
+        // Mostrar mensagem de sucesso
+        alert(id ? 'Plano atualizado com sucesso!' : 'Plano adicionado com sucesso!');
+        
+        // Em um sistema real, aqui seria recarregada a lista de planos
+        // fetchPlans();
+      });
+      
+      // Botões de excluir plano
+      document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          const plan = plans.find(p => p.id == id);
+          
+          if (plan) {
+            // Configurar modal de confirmação
+            document.getElementById('confirmModalBody').textContent = `Tem certeza que deseja excluir o plano "${plan.name}"? Esta ação não pode ser desfeita.`;
+            
+            // Configurar botão de confirmação
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            confirmDeleteBtn.setAttribute('data-id', id);
+            
+            // Abrir modal de confirmação
+            new bootstrap.Modal(document.getElementById('confirmModal')).show();
+          }
+        });
+      });
+      
+      // Confirmar exclusão de plano
+      document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+        const id = this.getAttribute('data-id');
+        
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // para excluir o plano
+        
+        // deletePlan(id);
+        console.log('Excluindo plano:', id);
+        
+        // Fechar o modal
+        bootstrap.Modal.getInstance(document.getElementById('confirmModal')).hide();
+        
+        // Mostrar mensagem de sucesso
+        alert('Plano excluído com sucesso!');
+        
+        // Em um sistema real, aqui seria recarregada a lista de planos
+        // fetchPlans();
+      });
+      
+      // Botão de exportar
+      document.getElementById('exportBtn').addEventListener('click', function() {
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // para exportar os dados dos planos adquiridos
+        
+        // Exemplo:
+        // exportPurchasedPlans();
+        
+        alert('Lista de planos adquiridos exportada com sucesso!');
+      });
+    });
+    
+    // Função para buscar planos (em um sistema real)
+    function fetchPlans() {
+      fetch('/api/admin/plans', {
+        headers: {
+          'Authorization': `Bearer ${getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao buscar planos');
+        }
+      })
+      .then(plans => {
+        renderPlans(plans);
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para buscar planos adquiridos (em um sistema real)
+    function fetchPurchasedPlans() {
+      fetch('/api/admin/plans/purchased', {
+        headers: {
+          'Authorization': `Bearer ${getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao buscar planos adquiridos');
+        }
+      })
+      .then(purchasedPlans => {
+        renderPurchasedPlans(purchasedPlans);
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para renderizar planos (em um sistema real)
+    function renderPlans(plans) {
+      const plansList = document.getElementById('plansList');
+      plansList.innerHTML = '';
+      
+      if (plans.length === 0) {
+        plansList.innerHTML = `
+          <tr>
+            <td colspan="8" class="text-center py-4">
+              <div class="empty-state">
+                <i class="fas fa-tags fa-3x mb-3 text-muted"></i>
+                <h4>Nenhum plano encontrado</h4>
+                <p class="text-muted">Adicione planos para começar</p>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+      
+      plans.forEach(plan => {
+        // Formatar preço
+        const formattedPrice = plan.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        
+        // Formatar serviços
+        let servicesText = '';
+        if (plan.services && plan.services.length > 0) {
+          servicesText = plan.services.map(service => `${service.name} (${service.quantity})`).join(', ');
+        } else {
+          servicesText = '-';
+        }
+        
+        // Criar linha da tabela
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${plan.id}</td>
+          <td>${plan.name}</td>
+          <td>${plan.description || '-'}</td>
+          <td>${formattedPrice}</td>
+          <td>${plan.validity_days}</td>
+          <td>${servicesText}</td>
+          <td><span class="badge ${plan.active ? 'bg-success' : 'bg-secondary'}">${plan.active ? 'Ativo' : 'Inativo'}</span></td>
+          <td>
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-outline-primary edit-btn" data-id="${plan.id}" data-bs-toggle="modal" data-bs-target="#planModal" title="Editar"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-outline-danger delete-btn" data-id="${plan.id}" title="Excluir"><i class="fas fa-trash"></i></button>
+            </div>
+          </td>
+        `;
+        
+        plansList.appendChild(row);
+      });
+      
+      // Reconfigurar botões de ação
+      setupActionButtons();
+    }
+    
+    // Função para renderizar planos adquiridos (em um sistema real)
+    function renderPurchasedPlans(purchasedPlans) {
+      const purchasedPlansList = document.getElementById('purchasedPlansList');
+      purchasedPlansList.innerHTML = '';
+      
+      if (purchasedPlans.length === 0) {
+        purchasedPlansList.innerHTML = `
+          <tr>
+            <td colspan="8" class="text-center py-4">
+              <div class="empty-state">
+                <i class="fas fa-shopping-cart fa-3x mb-3 text-muted"></i>
+                <h4>Nenhum plano adquirido</h4>
+                <p class="text-muted">Ainda não há planos adquiridos pelos clientes</p>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+      
+      purchasedPlans.forEach(purchasedPlan => {
+        // Formatar datas
+        const purchaseDate = new Date(purchasedPlan.purchase_date);
+        const expiryDate = new Date(purchasedPlan.expiry_date);
+        const formattedPurchaseDate = purchaseDate.toLocaleDateString('pt-BR');
+        const formattedExpiryDate = expiryDate.toLocaleDateString('pt-BR');
+        
+        // Definir status
+        let statusClass = '';
+        let statusText = '';
+        
+        switch (purchasedPlan.status) {
+          case 'active':
+            statusClass = 'bg-success';
+            statusText = 'Ativo';
+            break;
+          case 'expired':
+            statusClass = 'bg-secondary';
+            statusText = 'Expirado';
+            break;
+          case 'cancelled':
+            statusClass = 'bg-danger';
+            statusText = 'Cancelado';
+            break;
+        }
+        
+        // Criar linha da tabela
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${purchasedPlan.id}</td>
+          <td>${purchasedPlan.user.name}</td>
+          <td>${purchasedPlan.plan.name}</td>
+          <td>${formattedPurchaseDate}</td>
+          <td>${formattedExpiryDate}</td>
+          <td>${purchasedPlan.used_services}/${purchasedPlan.total_services}</td>
+          <td><span class="badge ${statusClass}">${statusText}</span></td>
+          <td>
+            <div class="btn-group btn-group-sm">
+              <a href="plano-adquirido-detalhe.html?id=${purchasedPlan.id}" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+            </div>
+          </td>
+        `;
+        
+        purchasedPlansList.appendChild(row);
+      });
+    }
+    
+    // Função para configurar botões de ação (em um sistema real)
+    function setupActionButtons() {
+      // Botões de editar
+      document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          // O modal será preenchido pelo evento show.bs.modal
+        });
+      });
+      
+      // Botões de excluir
+      document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          
+          // Buscar plano
+          fetch(`/api/admin/plans/${id}`, {
+            headers: {
+              'Authorization': `Bearer ${getToken()}`
+            }
+          })
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Erro ao buscar plano');
+            }
+          })
+          .then(plan => {
+            // Configurar modal de confirmação
+            document.getElementById('confirmModalBody').textContent = `Tem certeza que deseja excluir o plano "${plan.name}"? Esta ação não pode ser desfeita.`;
+            
+            // Configurar botão de confirmação
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            confirmDeleteBtn.setAttribute('data-id', id);
+            
+            // Abrir modal de confirmação
+            new bootstrap.Modal(document.getElementById('confirmModal')).show();
+          })
+          .catch(error => {
+            console.error('Erro:', error);
+            alert(error.message);
+          });
+        });
+      });
+    }
+    
+    // Função para criar plano (em um sistema real)
+    function createPlan(data) {
+      fetch('/api/admin/plans', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao criar plano');
+        }
+      })
+      .then(data => {
+        alert('Plano criado com sucesso!');
+        fetchPlans();
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para atualizar plano (em um sistema real)
+    function updatePlan(id, data) {
+      fetch(`/api/admin/plans/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao atualizar plano');
+        }
+      })
+      .then(data => {
+        alert('Plano atualizado com sucesso!');
+        fetchPlans();
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para excluir plano (em um sistema real)
+    function deletePlan(id) {
+      fetch(`/api/admin/plans/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao excluir plano');
+        }
+      })
+      .then(data => {
+        alert('Plano excluído com sucesso!');
+        fetchPlans();
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para exportar planos adquiridos (em um sistema real)
+    function exportPurchasedPlans() {
+      fetch('/api/admin/plans/purchased/export', {
+        headers: {
+          'Authorization': `Bearer ${getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.blob();
+        } else {
+          throw new Error('Erro ao exportar planos adquiridos');
+        }
+      })
+      .then(blob => {
+        // Criar link para download
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'planos_adquiridos_amor_pet.csv';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para obter token (em um sistema real)
+    function getToken() {
+      return localStorage.getItem('token');
+    }
+  </script>
+</body>
+</html>

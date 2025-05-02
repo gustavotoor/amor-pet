@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Pet - Amor Pet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/tutor.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html">
+            <img src="../images/logo.svg" alt="Amor Pet" class="logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="pets.html">Meus Pets</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="agendamentos.html">Agendamentos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="planos.html">Planos</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-user-circle"></i> <span id="userName">Usuário</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="perfil.html">Meu Perfil</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#" id="logoutBtn">Sair</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="tutor-dashboard">
+    <div class="container py-5">
+      <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="pets.html">Meus Pets</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Detalhes do Pet</li>
+        </ol>
+      </nav>
+
+      <div class="form-section">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 id="petName">Detalhes do Pet</h2>
+          <div>
+            <a href="#" id="editPetBtn" class="btn btn-outline-primary me-2">
+              <i class="fas fa-edit"></i> Editar
+            </a>
+            <button id="deletePetBtn" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+              <i class="fas fa-trash"></i> Excluir
+            </button>
+          </div>
+        </div>
+        
+        <div class="pet-details">
+          <div class="pet-details-image">
+            <img src="../images/pet-placeholder.jpg" alt="Foto do Pet" id="petPhoto" class="img-fluid">
+          </div>
+          
+          <div class="pet-details-info">
+            <div class="info-item">
+              <span class="info-label">Espécie:</span>
+              <span id="petSpecies">Cão</span>
+            </div>
+            
+            <div class="info-item">
+              <span class="info-label">Raça:</span>
+              <span id="petBreed">Labrador</span>
+            </div>
+            
+            <div class="info-item">
+              <span class="info-label">Idade:</span>
+              <span id="petAge">3 anos</span>
+            </div>
+            
+            <div class="info-item">
+              <span class="info-label">Peso:</span>
+              <span id="petWeight">25.5 kg</span>
+            </div>
+            
+            <div class="info-item mt-4">
+              <span class="info-label">Observações:</span>
+              <p id="petObservations">Não gosta de secador muito quente. Prefere banhos com água morna.</p>
+            </div>
+          </div>
+        </div>
+        
+        <hr class="my-4">
+        
+        <h3>Histórico de Agendamentos</h3>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Serviço</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="appointmentsTable">
+              <tr>
+                <td>25/04/2025 - 14:00</td>
+                <td>Banho</td>
+                <td><span class="badge bg-success">Confirmado</span></td>
+                <td>
+                  <a href="agendamento-detalhe.html?id=1" class="btn btn-sm btn-outline-primary">Ver</a>
+                </td>
+              </tr>
+              <tr>
+                <td>10/03/2025 - 10:30</td>
+                <td>Banho e Tosa</td>
+                <td><span class="badge bg-secondary">Concluído</span></td>
+                <td>
+                  <a href="agendamento-detalhe.html?id=2" class="btn btn-sm btn-outline-primary">Ver</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="d-flex justify-content-center mt-4">
+          <a href="agendar.html" class="btn btn-primary">
+            <i class="fas fa-calendar-plus"></i> Agendar Serviço
+          </a>
+        </div>
+      </div>
+      
+      <!-- Modal de Confirmação de Exclusão -->
+      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+              <p>Tem certeza que deseja excluir este pet? Esta ação não pode ser desfeita.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" id="confirmDelete">Excluir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="../images/logo.svg" alt="Amor Pet" class="footer-logo">
+          <p>Cuidando do seu pet com amor e carinho.</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Links Rápidos</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html#servicos">Serviços</a></li>
+            <li><a href="../index.html#planos">Planos</a></li>
+            <li><a href="../index.html#como-funciona">Como Funciona</a></li>
+            <li><a href="../index.html#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4>Redes Sociais</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p class="copyright">© 2025 Amor Pet - Todos os direitos reservados</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Verificar se o usuário está autenticado
+      if (!AuthService.isAuthenticated()) {
+        window.location.href = '../login.html';
+        return;
+      }
+      
+      // Obter dados do usuário
+      const user = AuthService.getCurrentUser();
+      
+      // Preencher nome do usuário
+      document.getElementById('userName').textContent = user.name.split(' ')[0];
+      
+      // Configurar botão de logout
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        AuthService.logout();
+      });
+      
+      // Obter ID do pet da URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const petId = urlParams.get('id');
+      
+      if (!petId) {
+        window.location.href = 'pets.html';
+        return;
+      }
+      
+      // Em um sistema real, aqui seria feita a requisição para a API
+      // para buscar os detalhes do pet e seus agendamentos
+      
+      // Exemplo:
+      // fetchPetDetails(petId);
+      // fetchPetAppointments(petId);
+      
+      // Configurar botões de ação
+      document.getElementById('editPetBtn').href = `pet-editar.html?id=${petId}`;
+      
+      document.getElementById('confirmDelete').addEventListener('click', function() {
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // para excluir o pet
+        
+        // Exemplo:
+        // deletePet(petId);
+        
+        // Simulação de exclusão bem-sucedida
+        alert('Pet excluído com sucesso!');
+        window.location.href = 'pets.html';
+        
+        // Fechar o modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+        modal.hide();
+      });
+    });
+    
+    // Função para buscar detalhes do pet (em um sistema real)
+    function fetchPetDetails(petId) {
+      fetch(`/api/pets/${petId}`, {
+        headers: {
+          'Authorization': `Bearer ${AuthService.getToken()}`
+        }
+      })
+      .then(response => response.json())
+      .then(pet => {
+        // Preencher detalhes do pet
+        document.getElementById('petName').textContent = pet.name;
+        document.getElementById('petSpecies').textContent = pet.species;
+        document.getElementById('petBreed').textContent = pet.breed || 'Não informado';
+        document.getElementById('petAge').textContent = pet.age ? `${pet.age} anos` : 'Não informado';
+        document.getElementById('petWeight').textContent = pet.weight ? `${pet.weight} kg` : 'Não informado';
+        document.getElementById('petObservations').textContent = pet.observations || 'Nenhuma observação';
+        
+        if (pet.photo_url) {
+          document.getElementById('petPhoto').src = pet.photo_url;
+        }
+      })
+      .catch(error => console.error('Erro ao buscar detalhes do pet:', error));
+    }
+    
+    // Função para buscar agendamentos do pet (em um sistema real)
+    function fetchPetAppointments(petId) {
+      fetch(`/api/appointments?pet_id=${petId}`, {
+        headers: {
+          'Authorization': `Bearer ${AuthService.getToken()}`
+        }
+      })
+      .then(response => response.json())
+      .then(appointments => {
+        // Preencher tabela de agendamentos
+        const appointmentsTable = document.getElementById('appointmentsTable');
+        appointmentsTable.innerHTML = '';
+        
+        if (appointments.length === 0) {
+          appointmentsTable.innerHTML = `
+            <tr>
+              <td colspan="4" class="text-center">Nenhum agendamento encontrado</td>
+            </tr>
+          `;
+          return;
+        }
+        
+        appointments.forEach(appointment => {
+          // Formatar data e hora
+          const date = new Date(appointment.appointment_date);
+          const formattedDate = date.toLocaleDateString('pt-BR');
+          const formattedTime = appointment.appointment_time.substring(0, 5);
+          
+          // Definir classe e texto do status
+          let statusClass = '';
+          switch (appointment.status) {
+            case 'confirmed':
+              statusClass = 'bg-success';
+              statusText = 'Confirmado';
+              break;
+            case 'pending':
+              statusClass = 'bg-warning';
+              statusText = 'Pendente';
+              break;
+            case 'completed':
+              statusClass = 'bg-secondary';
+              statusText = 'Concluído';
+              break;
+            case 'cancelled':
+              statusClass = 'bg-danger';
+              statusText = 'Cancelado';
+              break;
+            default:
+              statusClass = 'bg-secondary';
+              statusText = appointment.status;
+          }
+          
+          appointmentsTable.innerHTML += `
+            <tr>
+              <td>${formattedDate} - ${formattedTime}</td>
+              <td>${appointment.service_name}</td>
+              <td><span class="badge ${statusClass}">${statusText}</span></td>
+              <td>
+                <a href="agendamento-detalhe.html?id=${appointment.id}" class="btn btn-sm btn-outline-primary">Ver</a>
+              </td>
+            </tr>
+          `;
+        });
+      })
+      .catch(error => console.error('Erro ao buscar agendamentos do pet:', error));
+    }
+    
+    // Função para excluir pet (em um sistema real)
+    function deletePet(petId) {
+      fetch(`/api/pets/${petId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${AuthService.getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Pet excluído com sucesso!');
+          window.location.href = 'pets.html';
+        } else {
+          throw new Error('Erro ao excluir pet');
+        }
+      })
+      .catch(error => console.error('Erro ao excluir pet:', error));
+    }
+  </script>
+</body>
+</html>

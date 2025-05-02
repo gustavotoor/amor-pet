@@ -1,0 +1,514 @@
+/* Estilos para a área administrativa do Amor Pet */
+
+/* Variáveis de cores */
+:root {
+  --primary-color: #A8D5BA;
+  --secondary-color: #B3D4E5;
+  --tertiary-color: #F5E8C7;
+  --accent-color: #F4A261;
+  --dark-color: #2C3E50;
+  --light-color: #FFFFFF;
+  --gray-100: #F8F9FA;
+  --gray-200: #E9ECEF;
+  --gray-300: #DEE2E6;
+  --gray-400: #CED4DA;
+  --gray-500: #ADB5BD;
+  --gray-600: #6C757D;
+  --gray-700: #495057;
+  --gray-800: #343A40;
+  --gray-900: #212529;
+  --success-color: #28A745;
+  --info-color: #17A2B8;
+  --warning-color: #FFC107;
+  --danger-color: #DC3545;
+}
+
+/* Estilos gerais */
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--gray-100);
+  color: var(--gray-800);
+  margin: 0;
+  padding: 0;
+}
+
+/* Layout administrativo */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 250px;
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.sidebar-header {
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-header .logo {
+  height: 50px;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-header h1 {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav li {
+  margin-bottom: 0.25rem;
+}
+
+.sidebar-nav li a {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  color: var(--gray-400);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.sidebar-nav li a i {
+  margin-right: 0.75rem;
+  width: 20px;
+  text-align: center;
+}
+
+.sidebar-nav li a:hover {
+  color: var(--light-color);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav li.active a {
+  color: var(--light-color);
+  background-color: var(--primary-color);
+  border-left: 4px solid var(--accent-color);
+}
+
+.sidebar-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  color: var(--gray-400);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.sidebar-footer a i {
+  margin-right: 0.75rem;
+}
+
+.sidebar-footer a:hover {
+  color: var(--light-color);
+}
+
+/* Conteúdo principal */
+.admin-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.content-header {
+  background-color: var(--light-color);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-300);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-left h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: var(--gray-600);
+  font-size: 1.25rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+  background-color: var(--gray-200);
+  color: var(--gray-800);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.admin-profile {
+  display: flex;
+  align-items: center;
+}
+
+.admin-profile span {
+  margin-right: 0.75rem;
+  font-weight: 600;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar-sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.75rem;
+}
+
+.content-body {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+/* Cards de estatísticas */
+.stat-card {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  height: 100%;
+}
+
+.stat-card .card-body {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem;
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  color: var(--light-color);
+  font-size: 1.5rem;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.bg-success {
+  background-color: var(--success-color) !important;
+}
+
+.bg-info {
+  background-color: var(--info-color) !important;
+}
+
+.bg-warning {
+  background-color: var(--warning-color) !important;
+}
+
+.stat-details {
+  flex: 1;
+}
+
+.stat-title {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+
+.stat-change {
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.stat-change.positive {
+  color: var(--success-color);
+}
+
+.stat-change.negative {
+  color: var(--danger-color);
+}
+
+.stat-change i {
+  margin-left: 0.25rem;
+}
+
+/* Cards e tabelas */
+.card {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  margin-bottom: 1.5rem;
+}
+
+.card-header {
+  background-color: var(--light-color);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 1rem 1.25rem;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table th {
+  font-weight: 600;
+  border-top: none;
+  background-color: var(--gray-100);
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+/* Lista de usuários */
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info div {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info h4 {
+  font-size: 0.9rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.user-info p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* Lista de atividades */
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  color: var(--light-color);
+  font-size: 1rem;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-text {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.activity-time {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+}
+
+/* Botões e badges */
+.btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+}
+
+.badge {
+  font-weight: 500;
+  padding: 0.35em 0.65em;
+}
+
+/* Responsividade */
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1030;
+    transform: translateX(0);
+  }
+  
+  .sidebar-collapsed .admin-sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .admin-content {
+    margin-left: 0;
+  }
+}
+
+/* Sidebar colapsada */
+.sidebar-collapsed .admin-sidebar {
+  width: 70px;
+}
+
+.sidebar-collapsed .sidebar-header h1,
+.sidebar-collapsed .sidebar-nav li a span {
+  display: none;
+}
+
+.sidebar-collapsed .sidebar-nav li a {
+  justify-content: center;
+  padding: 0.75rem;
+}
+
+.sidebar-collapsed .sidebar-nav li a i {
+  margin-right: 0;
+  font-size: 1.25rem;
+}
+
+.sidebar-collapsed .sidebar-footer a span {
+  display: none;
+}
+
+.sidebar-collapsed .sidebar-footer a {
+  justify-content: center;
+}
+
+.sidebar-collapsed .sidebar-footer a i {
+  margin-right: 0;
+}
+
+/* Formulários */
+.form-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(168, 213, 186, 0.25);
+}
+
+/* Paginação */
+.pagination .page-item.active .page-link {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.pagination .page-link {
+  color: var(--dark-color);
+}
+
+.pagination .page-link:hover {
+  color: var(--dark-color);
+  background-color: var(--gray-200);
+}
+
+/* Filtros e pesquisa */
+.filter-form {
+  background-color: var(--light-color);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Detalhes de entidades */
+.detail-item {
+  margin-bottom: 0.75rem;
+}
+
+.detail-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+  margin-bottom: 0.25rem;
+}
+
+.detail-value {
+  font-weight: 600;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}

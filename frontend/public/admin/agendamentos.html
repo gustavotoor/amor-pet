@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamentos - Administração Amor Pet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../images/logo.svg" alt="Amor Pet" class="logo">
+        <h1>Administração</h1>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+          </li>
+          <li class="active">
+            <a href="agendamentos.html"><i class="fas fa-calendar-alt"></i> Agendamentos</a>
+          </li>
+          <li>
+            <a href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+          </li>
+          <li>
+            <a href="servicos.html"><i class="fas fa-concierge-bell"></i> Serviços</a>
+          </li>
+          <li>
+            <a href="planos.html"><i class="fas fa-tags"></i> Planos</a>
+          </li>
+          <li>
+            <a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
+          </li>
+          <li>
+            <a href="configuracoes.html"><i class="fas fa-cog"></i> Configurações</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="admin-content">
+      <header class="content-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h2>Agendamentos</h2>
+        </div>
+        <div class="header-right">
+          <div class="admin-profile">
+            <span id="adminName">Admin</span>
+            <img src="../images/admin-avatar.png" alt="Admin" class="avatar">
+          </div>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- Filtros -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3>Filtros</h3>
+          </div>
+          <div class="card-body">
+            <form class="row g-3" id="filterForm">
+              <div class="col-md-3">
+                <label for="dateFilter" class="form-label">Data</label>
+                <input type="date" class="form-control" id="dateFilter">
+              </div>
+              <div class="col-md-3">
+                <label for="statusFilter" class="form-label">Status</label>
+                <select class="form-select" id="statusFilter">
+                  <option value="">Todos</option>
+                  <option value="pending">Pendente</option>
+                  <option value="confirmed">Confirmado</option>
+                  <option value="completed">Concluído</option>
+                  <option value="cancelled">Cancelado</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="serviceFilter" class="form-label">Serviço</label>
+                <select class="form-select" id="serviceFilter">
+                  <option value="">Todos</option>
+                  <option value="1">Banho</option>
+                  <option value="2">Banho e Tosa</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="searchFilter" class="form-label">Buscar</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="searchFilter" placeholder="Cliente ou pet">
+                  <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Tabela de Agendamentos -->
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Lista de Agendamentos</h3>
+            <div class="btn-group">
+              <button class="btn btn-outline-secondary" id="todayBtn">Hoje</button>
+              <button class="btn btn-outline-secondary" id="tomorrowBtn">Amanhã</button>
+              <button class="btn btn-outline-secondary" id="weekBtn">Esta Semana</button>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Cliente</th>
+                    <th>Pet</th>
+                    <th>Serviço</th>
+                    <th>Pagamento</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="appointmentsList">
+                  <tr>
+                    <td>1</td>
+                    <td>24/04/2025</td>
+                    <td>14:00</td>
+                    <td>Maria Silva</td>
+                    <td>Rex (Labrador)</td>
+                    <td>Banho</td>
+                    <td><span class="badge bg-success">Pago</span></td>
+                    <td><span class="badge bg-success">Confirmado</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="agendamento-detalhe.html?id=1" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                        <button class="btn btn-outline-success complete-btn" data-id="1" title="Marcar como concluído"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-outline-danger cancel-btn" data-id="1" title="Cancelar agendamento"><i class="fas fa-times"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>24/04/2025</td>
+                    <td>15:30</td>
+                    <td>João Pereira</td>
+                    <td>Luna (Siamês)</td>
+                    <td>Banho e Tosa</td>
+                    <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                    <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="agendamento-detalhe.html?id=2" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                        <button class="btn btn-outline-success confirm-btn" data-id="2" title="Confirmar agendamento"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-outline-danger cancel-btn" data-id="2" title="Cancelar agendamento"><i class="fas fa-times"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>24/04/2025</td>
+                    <td>16:00</td>
+                    <td>Ana Oliveira</td>
+                    <td>Thor (Golden Retriever)</td>
+                    <td>Banho</td>
+                    <td><span class="badge bg-success">Pago</span></td>
+                    <td><span class="badge bg-success">Confirmado</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="agendamento-detalhe.html?id=3" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                        <button class="btn btn-outline-success complete-btn" data-id="3" title="Marcar como concluído"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-outline-danger cancel-btn" data-id="3" title="Cancelar agendamento"><i class="fas fa-times"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>25/04/2025</td>
+                    <td>09:00</td>
+                    <td>Carlos Santos</td>
+                    <td>Mel (Poodle)</td>
+                    <td>Banho e Tosa</td>
+                    <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                    <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="agendamento-detalhe.html?id=4" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                        <button class="btn btn-outline-success confirm-btn" data-id="4" title="Confirmar agendamento"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-outline-danger cancel-btn" data-id="4" title="Cancelar agendamento"><i class="fas fa-times"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>25/04/2025</td>
+                    <td>10:30</td>
+                    <td>Fernanda Lima</td>
+                    <td>Nina (Persa)</td>
+                    <td>Banho</td>
+                    <td><span class="badge bg-success">Pago</span></td>
+                    <td><span class="badge bg-success">Confirmado</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="agendamento-detalhe.html?id=5" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                        <button class="btn btn-outline-success complete-btn" data-id="5" title="Marcar como concluído"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-outline-danger cancel-btn" data-id="5" title="Cancelar agendamento"><i class="fas fa-times"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>26/04/2025</td>
+                    <td>14:00</td>
+                    <td>Roberto Alves</td>
+                    <td>Max (Bulldog)</td>
+                    <td>Banho</td>
+                    <td><span class="badge bg-success">Pago</span></td>
+                    <td><span class="badge bg-success">Confirmado</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="agendamento-detalhe.html?id=6" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                        <button class="btn btn-outline-success complete-btn" data-id="6" title="Marcar como concluído"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-outline-danger cancel-btn" data-id="6" title="Cancelar agendamento"><i class="fas fa-times"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>26/04/2025</td>
+                    <td>15:00</td>
+                    <td>Juliana Costa</td>
+                    <td>Bella (Yorkshire)</td>
+                    <td>Banho e Tosa</td>
+                    <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                    <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="agendamento-detalhe.html?id=7" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                        <button class="btn btn-outline-success confirm-btn" data-id="7" title="Confirmar agendamento"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-outline-danger cancel-btn" data-id="7" title="Cancelar agendamento"><i class="fas fa-times"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>27/04/2025</td>
+                    <td>10:00</td>
+                    <td>Pedro Mendes</td>
+                    <td>Simba (Persa)</td>
+                    <td>Banho</td>
+                    <td><span class="badge bg-success">Pago</span></td>
+                    <td><span class="badge bg-success">Confirmado</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="agendamento-detalhe.html?id=8" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+                        <button class="btn btn-outline-success complete-btn" data-id="8" title="Marcar como concluído"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-outline-danger cancel-btn" data-id="8" title="Cancelar agendamento"><i class="fas fa-times"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <nav aria-label="Paginação de agendamentos">
+              <ul class="pagination justify-content-center mb-0">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Próximo</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal de Confirmação -->
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmModalLabel">Confirmar Ação</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body" id="confirmModalBody">
+          Tem certeza que deseja realizar esta ação?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="confirmModalBtn">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle sidebar
+      document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.querySelector('.admin-layout').classList.toggle('sidebar-collapsed');
+      });
+      
+      // Logout button
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        // Em um sistema real, aqui seria feito o logout
+        window.location.href = '../login.html';
+      });
+      
+      // Configurar botões de filtro rápido
+      document.getElementById('todayBtn').addEventListener('click', function() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('dateFilter').value = today;
+        document.getElementById('filterForm').dispatchEvent(new Event('submit'));
+      });
+      
+      document.getElementById('tomorrowBtn').addEventListener('click', function() {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('dateFilter').value = tomorrow.toISOString().split('T')[0];
+        document.getElementById('filterForm').dispatchEvent(new Event('submit'));
+      });
+      
+      document.getElementById('weekBtn').addEventListener('click', function() {
+        document.getElementById('dateFilter').value = '';
+        // Em um sistema real, aqui seria aplicado um filtro para a semana atual
+        document.getElementById('filterForm').dispatchEvent(new Event('submit'));
+      });
+      
+      // Formulário de filtro
+      document.getElementById('filterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // com os filtros aplicados
+        
+        // Exemplo:
+        // const date = document.getElementById('dateFilter').value;
+        // const status = document.getElementById('statusFilter').value;
+        // const service = document.getElementById('serviceFilter').value;
+        // const search = document.getElementById('searchFilter').value;
+        // 
+        // fetchAppointments({ date, status, service, search });
+        
+        console.log('Filtros aplicados');
+      });
+      
+      // Configurar botões de ação
+      setupActionButtons();
+    });
+    
+    function setupActionButtons() {
+      // Botões de confirmar agendamento
+      document.querySelectorAll('.confirm-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const appointmentId = this.getAttribute('data-id');
+          
+          // Configurar modal
+          document.getElementById('confirmModalLabel').textContent = 'Confirmar Agendamento';
+          document.getElementById('confirmModalBody').textContent = `Tem certeza que deseja confirmar o agendamento #${appointmentId}?`;
+          
+          // Configurar botão de confirmação
+          const confirmBtn = document.getElementById('confirmModalBtn');
+          confirmBtn.className = 'btn btn-success';
+          confirmBtn.textContent = 'Confirmar';
+          
+          // Ação ao confirmar
+          confirmBtn.onclick = function() {
+            // Em um sistema real, aqui seria feita a requisição para a API
+            // para confirmar o agendamento
+            
+            // Exemplo:
+            // updateAppointmentStatus(appointmentId, 'confirmed');
+            
+            // Fechar o modal
+            bootstrap.Modal.getInstance(document.getElementById('confirmModal')).hide();
+            
+            // Atualizar a interface (simulação)
+            alert(`Agendamento #${appointmentId} confirmado com sucesso!`);
+          };
+          
+          // Abrir o modal
+          new bootstrap.Modal(document.getElementById('confirmModal')).show();
+        });
+      });
+      
+      // Botões de concluir agendamento
+      document.querySelectorAll('.complete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const appointmentId = this.getAttribute('data-id');
+          
+          // Configurar modal
+          document.getElementById('confirmModalLabel').textContent = 'Concluir Agendamento';
+          document.getElementById('confirmModalBody').textContent = `Tem certeza que deseja marcar o agendamento #${appointmentId} como concluído?`;
+          
+          // Configurar botão de confirmação
+          const confirmBtn = document.getElementById('confirmModalBtn');
+          confirmBtn.className = 'btn btn-success';
+          confirmBtn.textContent = 'Concluir';
+          
+          // Ação ao confirmar
+          confirmBtn.onclick = function() {
+            // Em um sistema real, aqui seria feita a requisição para a API
+            // para concluir o agendamento
+            
+            // Exemplo:
+            // updateAppointmentStatus(appointmentId, 'completed');
+            
+            // Fechar o modal
+            bootstrap.Modal.getInstance(document.getElementById('confirmModal')).hide();
+            
+            // Atualizar a interface (simulação)
+            alert(`Agendamento #${appointmentId} concluído com sucesso!`);
+          };
+          
+          // Abrir o modal
+          new bootstrap.Modal(document.getElementById('confirmModal')).show();
+        });
+      });
+      
+      // Botões de cancelar agendamento
+      document.querySelectorAll('.cancel-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const appointmentId = this.getAttribute('data-id');
+          
+          // Configurar modal
+          document.getElementById('confirmModalLabel').textContent = 'Cancelar Agendamento';
+          document.getElementById('confirmModalBody').textContent = `Tem certeza que deseja cancelar o agendamento #${appointmentId}? Esta ação não pode ser desfeita.`;
+          
+          // Configurar botão de confirmação
+          const confirmBtn = document.getElementById('confirmModalBtn');
+          confirmBtn.className = 'btn btn-danger';
+          confirmBtn.textContent = 'Cancelar Agendamento';
+          
+          // Ação ao confirmar
+          confirmBtn.onclick = function() {
+            // Em um sistema real, aqui seria feita a requisição para a API
+            // para cancelar o agendamento
+            
+            // Exemplo:
+            // updateAppointmentStatus(appointmentId, 'cancelled');
+            
+            // Fechar o modal
+            bootstrap.Modal.getInstance(document.getElementById('confirmModal')).hide();
+            
+            // Atualizar a interface (simulação)
+            alert(`Agendamento #${appointmentId} cancelado com sucesso!`);
+          };
+          
+          // Abrir o modal
+          new bootstrap.Modal(document.getElementById('confirmModal')).show();
+        });
+      });
+    }
+    
+    // Função para buscar agendamentos (em um sistema real)
+    function fetchAppointments(filters = {}) {
+      // Construir query string
+      const queryParams = new URLSearchParams();
+      
+      if (filters.date) queryParams.append('date', filters.date);
+      if (filters.status) queryParams.append('status', filters.status);
+      if (filters.service) queryParams.append('service_id', filters.service);
+      if (filters.search) queryParams.append('search', filters.search);
+      
+      // Adicionar paginação
+      queryParams.append('page', filters.page || 1);
+      queryParams.append('limit', filters.limit || 10);
+      
+      fetch(`/api/admin/appointments?${queryParams.toString()}`, {
+        headers: {
+          'Authorization': `Bearer ${getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao buscar agendamentos');
+        }
+      })
+      .then(data => {
+        renderAppointments(data.appointments);
+        renderPagination(data.pagination);
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para atualizar status de agendamento (em um sistema real)
+    function updateAppointmentStatus(appointmentId, status) {
+      fetch(`/api/admin/appointments/${appointmentId}/status`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify({ status })
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao atualizar status do agendamento');
+        }
+      })
+      .then(data => {
+        alert(data.message);
+        // Recarregar agendamentos
+        fetchAppointments();
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para renderizar agendamentos (em um sistema real)
+    function renderAppointments(appointments) {
+      const appointmentsList = document.getElementById('appointmentsList');
+      appointmentsList.innerHTML = '';
+      
+      if (appointments.length === 0) {
+        appointmentsList.innerHTML = `
+          <tr>
+            <td colspan="9" class="text-center py-4">
+              <div class="empty-state">
+                <i class="fas fa-calendar-times fa-3x mb-3 text-muted"></i>
+                <h4>Nenhum agendamento encontrado</h4>
+                <p class="text-muted">Tente ajustar os filtros de busca</p>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+      
+      appointments.forEach(appointment => {
+        // Formatar data e hora
+        const appointmentDate = new Date(appointment.appointment_date);
+        const formattedDate = appointmentDate.toLocaleDateString('pt-BR');
+        const formattedTime = appointment.appointment_time;
+        
+        // Definir classes e textos para status
+        let statusClass = '';
+        let statusText = '';
+        
+        switch (appointment.status) {
+          case 'pending':
+            statusClass = 'bg-warning text-dark';
+            statusText = 'Pendente';
+            break;
+          case 'confirmed':
+            statusClass = 'bg-success';
+            statusText = 'Confirmado';
+            break;
+          case 'completed':
+            statusClass = 'bg-secondary';
+            statusText = 'Concluído';
+            break;
+          case 'cancelled':
+            statusClass = 'bg-danger';
+            statusText = 'Cancelado';
+            break;
+        }
+        
+        // Definir classes e textos para pagamento
+        let paymentClass = '';
+        let paymentText = '';
+        
+        if (appointment.payment) {
+          switch (appointment.payment.status) {
+            case 'pending':
+              paymentClass = 'bg-warning text-dark';
+              paymentText = 'Pendente';
+              break;
+            case 'completed':
+              paymentClass = 'bg-success';
+              paymentText = 'Pago';
+              break;
+            case 'failed':
+              paymentClass = 'bg-danger';
+              paymentText = 'Falhou';
+              break;
+            case 'refunded':
+              paymentClass = 'bg-info';
+              paymentText = 'Reembolsado';
+              break;
+          }
+        } else {
+          paymentClass = 'bg-secondary';
+          paymentText = 'N/A';
+        }
+        
+        // Definir botões de ação com base no status
+        let actionButtons = `
+          <div class="btn-group btn-group-sm">
+            <a href="agendamento-detalhe.html?id=${appointment.id}" class="btn btn-outline-primary" title="Ver detalhes"><i class="fas fa-eye"></i></a>
+        `;
+        
+        if (appointment.status === 'pending') {
+          actionButtons += `
+            <button class="btn btn-outline-success confirm-btn" data-id="${appointment.id}" title="Confirmar agendamento"><i class="fas fa-check"></i></button>
+          `;
+        } else if (appointment.status === 'confirmed') {
+          actionButtons += `
+            <button class="btn btn-outline-success complete-btn" data-id="${appointment.id}" title="Marcar como concluído"><i class="fas fa-check"></i></button>
+          `;
+        }
+        
+        if (appointment.status !== 'cancelled' && appointment.status !== 'completed') {
+          actionButtons += `
+            <button class="btn btn-outline-danger cancel-btn" data-id="${appointment.id}" title="Cancelar agendamento"><i class="fas fa-times"></i></button>
+          `;
+        }
+        
+        actionButtons += `</div>`;
+        
+        // Criar linha da tabela
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${appointment.id}</td>
+          <td>${formattedDate}</td>
+          <td>${formattedTime}</td>
+          <td>${appointment.user.name}</td>
+          <td>${appointment.pet.name} (${appointment.pet.breed})</td>
+          <td>${appointment.service.name}</td>
+          <td><span class="badge ${paymentClass}">${paymentText}</span></td>
+          <td><span class="badge ${statusClass}">${statusText}</span></td>
+          <td>${actionButtons}</td>
+        `;
+        
+        appointmentsList.appendChild(row);
+      });
+      
+      // Reconfigurar botões de ação
+      setupActionButtons();
+    }
+    
+    // Função para renderizar paginação (em um sistema real)
+    function renderPagination(pagination) {
+      const paginationElement = document.querySelector('.pagination');
+      paginationElement.innerHTML = '';
+      
+      // Botão anterior
+      const prevButton = document.createElement('li');
+      prevButton.className = `page-item ${pagination.current_page === 1 ? 'disabled' : ''}`;
+      prevButton.innerHTML = `
+        <a class="page-link" href="#" ${pagination.current_page === 1 ? 'tabindex="-1" aria-disabled="true"' : ''}>Anterior</a>
+      `;
+      
+      if (pagination.current_page > 1) {
+        prevButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          fetchAppointments({ page: pagination.current_page - 1 });
+        });
+      }
+      
+      paginationElement.appendChild(prevButton);
+      
+      // Páginas
+      const startPage = Math.max(1, pagination.current_page - 2);
+      const endPage = Math.min(pagination.total_pages, pagination.current_page + 2);
+      
+      for (let i = startPage; i <= endPage; i++) {
+        const pageButton = document.createElement('li');
+        pageButton.className = `page-item ${i === pagination.current_page ? 'active' : ''}`;
+        pageButton.innerHTML = `
+          <a class="page-link" href="#">${i}</a>
+        `;
+        
+        pageButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          fetchAppointments({ page: i });
+        });
+        
+        paginationElement.appendChild(pageButton);
+      }
+      
+      // Botão próximo
+      const nextButton = document.createElement('li');
+      nextButton.className = `page-item ${pagination.current_page === pagination.total_pages ? 'disabled' : ''}`;
+      nextButton.innerHTML = `
+        <a class="page-link" href="#" ${pagination.current_page === pagination.total_pages ? 'tabindex="-1" aria-disabled="true"' : ''}>Próximo</a>
+      `;
+      
+      if (pagination.current_page < pagination.total_pages) {
+        nextButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          fetchAppointments({ page: pagination.current_page + 1 });
+        });
+      }
+      
+      paginationElement.appendChild(nextButton);
+    }
+    
+    // Função para obter token (em um sistema real)
+    function getToken() {
+      return localStorage.getItem('token');
+    }
+  </script>
+</body>
+</html>

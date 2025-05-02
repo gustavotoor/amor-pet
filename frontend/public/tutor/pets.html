@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meus Pets - Amor Pet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/tutor.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html">
+            <img src="../images/logo.svg" alt="Amor Pet" class="logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="pets.html">Meus Pets</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="agendamentos.html">Agendamentos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="planos.html">Planos</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-user-circle"></i> <span id="userName">Usuário</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="perfil.html">Meu Perfil</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#" id="logoutBtn">Sair</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="tutor-dashboard">
+    <div class="container py-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Meus Pets</h1>
+        <a href="pet-cadastro.html" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Adicionar Pet
+        </a>
+      </div>
+      
+      <!-- Lista de Pets -->
+      <div class="row" id="petsList">
+        <!-- Será preenchido via JavaScript -->
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="pet-card">
+            <div class="pet-image">
+              <img src="../images/pet-placeholder.jpg" alt="Rex" class="img-fluid">
+            </div>
+            <div class="pet-info">
+              <h3>Rex</h3>
+              <p>Cão - Labrador</p>
+              <div class="d-flex justify-content-between mt-3">
+                <a href="pet-detalhe.html?id=1" class="btn btn-sm btn-outline-primary">Ver Detalhes</a>
+                <div>
+                  <a href="pet-editar.html?id=1" class="btn btn-sm btn-outline-secondary me-1">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <button class="btn btn-sm btn-outline-danger delete-pet" data-id="1" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="pet-card">
+            <div class="pet-image">
+              <img src="../images/pet-placeholder.jpg" alt="Luna" class="img-fluid">
+            </div>
+            <div class="pet-info">
+              <h3>Luna</h3>
+              <p>Gato - Siamês</p>
+              <div class="d-flex justify-content-between mt-3">
+                <a href="pet-detalhe.html?id=2" class="btn btn-sm btn-outline-primary">Ver Detalhes</a>
+                <div>
+                  <a href="pet-editar.html?id=2" class="btn btn-sm btn-outline-secondary me-1">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <button class="btn btn-sm btn-outline-danger delete-pet" data-id="2" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="pet-card new-pet">
+            <div class="new-pet-content">
+              <i class="fas fa-plus-circle"></i>
+              <h3>Adicionar Pet</h3>
+              <p>Cadastre um novo pet</p>
+            </div>
+            <a href="pet-cadastro.html" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Modal de Confirmação de Exclusão -->
+      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+              <p>Tem certeza que deseja excluir este pet? Esta ação não pode ser desfeita.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" id="confirmDelete">Excluir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="../images/logo.svg" alt="Amor Pet" class="footer-logo">
+          <p>Cuidando do seu pet com amor e carinho.</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Links Rápidos</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html#servicos">Serviços</a></li>
+            <li><a href="../index.html#planos">Planos</a></li>
+            <li><a href="../index.html#como-funciona">Como Funciona</a></li>
+            <li><a href="../index.html#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4>Redes Sociais</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p class="copyright">© 2025 Amor Pet - Todos os direitos reservados</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Verificar se o usuário está autenticado
+      if (!AuthService.isAuthenticated()) {
+        window.location.href = '../login.html';
+        return;
+      }
+      
+      // Obter dados do usuário
+      const user = AuthService.getCurrentUser();
+      
+      // Preencher nome do usuário
+      document.getElementById('userName').textContent = user.name.split(' ')[0];
+      
+      // Configurar botão de logout
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        AuthService.logout();
+      });
+      
+      // Em um sistema real, aqui seria feita a requisição para a API
+      // para buscar os pets do usuário
+      
+      // Exemplo:
+      // fetchUserPets();
+      
+      // Configurar modal de exclusão
+      let petIdToDelete = null;
+      
+      document.querySelectorAll('.delete-pet').forEach(button => {
+        button.addEventListener('click', function() {
+          petIdToDelete = this.getAttribute('data-id');
+        });
+      });
+      
+      document.getElementById('confirmDelete').addEventListener('click', function() {
+        if (petIdToDelete) {
+          // Em um sistema real, aqui seria feita a requisição para a API
+          // para excluir o pet
+          
+          // Exemplo:
+          // deletePet(petIdToDelete);
+          
+          // Simulação de exclusão bem-sucedida
+          alert('Pet excluído com sucesso!');
+          window.location.reload();
+        }
+        
+        // Fechar o modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+        modal.hide();
+      });
+    });
+    
+    // Função para buscar pets do usuário (em um sistema real)
+    function fetchUserPets() {
+      fetch('/api/pets', {
+        headers: {
+          'Authorization': `Bearer ${AuthService.getToken()}`
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Renderizar pets
+        const petsList = document.getElementById('petsList');
+        petsList.innerHTML = '';
+        
+        data.forEach(pet => {
+          // Criar card para cada pet
+        });
+        
+        // Adicionar card para novo pet
+        const newPetCard = document.createElement('div');
+        newPetCard.className = 'col-md-4 col-sm-6 mb-4';
+        newPetCard.innerHTML = `
+          <div class="pet-card new-pet">
+            <div class="new-pet-content">
+              <i class="fas fa-plus-circle"></i>
+              <h3>Adicionar Pet</h3>
+              <p>Cadastre um novo pet</p>
+            </div>
+            <a href="pet-cadastro.html" class="stretched-link"></a>
+          </div>
+        `;
+        petsList.appendChild(newPetCard);
+      })
+      .catch(error => console.error('Erro ao buscar pets:', error));
+    }
+    
+    // Função para excluir pet (em um sistema real)
+    function deletePet(petId) {
+      fetch(`/api/pets/${petId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${AuthService.getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Pet excluído com sucesso!');
+          window.location.reload();
+        } else {
+          throw new Error('Erro ao excluir pet');
+        }
+      })
+      .catch(error => console.error('Erro ao excluir pet:', error));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações - Administração Amor Pet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../images/logo.svg" alt="Amor Pet" class="logo">
+        <h1>Administração</h1>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="agendamentos.html"><i class="fas fa-calendar-alt"></i> Agendamentos</a>
+          </li>
+          <li>
+            <a href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+          </li>
+          <li>
+            <a href="servicos.html"><i class="fas fa-concierge-bell"></i> Serviços</a>
+          </li>
+          <li>
+            <a href="planos.html"><i class="fas fa-tags"></i> Planos</a>
+          </li>
+          <li>
+            <a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
+          </li>
+          <li class="active">
+            <a href="configuracoes.html"><i class="fas fa-cog"></i> Configurações</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="admin-content">
+      <header class="content-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h2>Configurações</h2>
+        </div>
+        <div class="header-right">
+          <div class="admin-profile">
+            <span id="adminName">Admin</span>
+            <img src="../images/admin-avatar.png" alt="Admin" class="avatar">
+          </div>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- Navegação por Abas -->
+        <ul class="nav nav-tabs mb-4" id="configTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="general" aria-selected="true">Geral</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule" type="button" role="tab" aria-controls="schedule" aria-selected="false">Horários</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications" type="button" role="tab" aria-controls="notifications" aria-selected="false">Notificações</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">Pagamento</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="false">Usuários</button>
+          </li>
+        </ul>
+        
+        <!-- Conteúdo das Abas -->
+        <div class="tab-content" id="configTabsContent">
+          <!-- Configurações Gerais -->
+          <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3>Informações do Pet Shop</h3>
+              </div>
+              <div class="card-body">
+                <form id="generalForm">
+                  <div class="mb-3">
+                    <label for="shopName" class="form-label">Nome do Pet Shop</label>
+                    <input type="text" class="form-control" id="shopName" value="Amor Pet" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="shopAddress" class="form-label">Endereço</label>
+                    <input type="text" class="form-control" id="shopAddress" value="Rua das Flores, 123 - São Paulo, SP" required>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="shopPhone" class="form-label">Telefone</label>
+                      <input type="tel" class="form-control" id="shopPhone" value="(11) 98765-4321" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="shopEmail" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="shopEmail" value="contato@amorpet.com.br" required>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="shopLogo" class="form-label">Logo</label>
+                    <div class="d-flex align-items-center">
+                      <img src="../images/logo.svg" alt="Logo atual" class="me-3" style="height: 60px;">
+                      <div class="input-group">
+                        <input type="file" class="form-control" id="shopLogo" accept="image/*">
+                        <button class="btn btn-outline-secondary" type="button">Alterar</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="shopDescription" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="shopDescription" rows="3">O Amor Pet é um pet shop dedicado a oferecer os melhores serviços de banho e tosa para o seu animal de estimação. Nosso objetivo é proporcionar bem-estar e cuidado com muito carinho e profissionalismo.</textarea>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Configurações de Horários -->
+          <div class="tab-pane fade" id="schedule" role="tabpanel" aria-labelledby="schedule-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3>Horários de Funcionamento</h3>
+              </div>
+              <div class="card-body">
+                <form id="scheduleForm">
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Dia</th>
+                          <th>Status</th>
+                          <th>Horário de Abertura</th>
+                          <th>Horário de Fechamento</th>
+                          <th>Capacidade</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Segunda-feira</td>
+                          <td>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="mondayStatus" checked>
+                              <label class="form-check-label" for="mondayStatus">Aberto</label>
+                            </div>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="mondayOpen" value="08:00" required>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="mondayClose" value="18:00" required>
+                          </td>
+                          <td>
+                            <input type="number" class="form-control" id="mondayCapacity" value="8" min="1" required>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Terça-feira</td>
+                          <td>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="tuesdayStatus" checked>
+                              <label class="form-check-label" for="tuesdayStatus">Aberto</label>
+                            </div>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="tuesdayOpen" value="08:00" required>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="tuesdayClose" value="18:00" required>
+                          </td>
+                          <td>
+                            <input type="number" class="form-control" id="tuesdayCapacity" value="8" min="1" required>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Quarta-feira</td>
+                          <td>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="wednesdayStatus" checked>
+                              <label class="form-check-label" for="wednesdayStatus">Aberto</label>
+                            </div>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="wednesdayOpen" value="08:00" required>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="wednesdayClose" value="18:00" required>
+                          </td>
+                          <td>
+                            <input type="number" class="form-control" id="wednesdayCapacity" value="8" min="1" required>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Quinta-feira</td>
+                          <td>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="thursdayStatus" checked>
+                              <label class="form-check-label" for="thursdayStatus">Aberto</label>
+                            </div>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="thursdayOpen" value="08:00" required>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="thursdayClose" value="18:00" required>
+                          </td>
+                          <td>
+                            <input type="number" class="form-control" id="thursdayCapacity" value="8" min="1" required>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Sexta-feira</td>
+                          <td>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="fridayStatus" checked>
+                              <label class="form-check-label" for="fridayStatus">Aberto</label>
+                            </div>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="fridayOpen" value="08:00" required>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="fridayClose" value="18:00" required>
+                          </td>
+                          <td>
+                            <input type="number" class="form-control" id="fridayCapacity" value="8" min="1" required>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Sábado</td>
+                          <td>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="saturdayStatus" checked>
+                              <label class="form-check-label" for="saturdayStatus">Aberto</label>
+                            </div>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="saturdayOpen" value="09:00" required>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="saturdayClose" value="16:00" required>
+                          </td>
+                          <td>
+                            <input type="number" class="form-control" id="saturdayCapacity" value="10" min="1" required>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Domingo</td>
+                          <td>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="sundayStatus">
+                              <label class="form-check-label" for="sundayStatus">Fechado</label>
+                            </div>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="sundayOpen" value="09:00" disabled>
+                          </td>
+                          <td>
+                            <input type="time" class="form-control" id="sundayClose" value="16:00" disabled>
+                          </td>
+                          <td>
+                            <input type="number" class="form-control" id="sundayCapacity" value="0" min="0" disabled>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  <div class="mt-4">
+                    <h4>Datas Bloqueadas</h4>
+                    <div class="row mb-3">
+                      <div class="col-md-5">
+                        <label for="blockedDate" class="form-label">Data</label>
+                        <input type="date" class="form-control" id="blockedDate">
+                      </div>
+                      <div class="col-md-5">
+                        <label for="blockedReason" class="form-label">Motivo</label>
+                        <input type="text" class="form-control" id="blockedReason" placeholder="Ex: Feriado, Manutenção">
+                      </div>
+                      <div class="col-md-2 d-flex align-items-end">
+                        <button type="button" class="btn btn-secondary w-100" id="addBlockedDateBtn">Adicionar</button>
+                      </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="blockedDatesTable">
+                        <thead>
+                          <tr>
+                            <th>Data</th>
+                            <th>Motivo</th>
+                            <th>Ações</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>01/05/2025</td>
+                            <td>Feriado - Dia do Trabalho</td>
+                            <td>
+                              <button type="button" class="btn btn-sm btn-danger remove-date-btn">
+                                <i class="fas fa-trash"></i>
+                              </button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>25/12/2025</td>
+                            <td>Feriado - Natal</td>
+                            <td>
+                              <button type="button" class="btn btn-sm btn-danger remove-date-btn">
+                                <i class="fas fa-trash"></i>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Configurações de Notificações -->
+          <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3>Configurações de Email</h3>
+              </div>
+              <div class="card-body">
+                <form id="emailForm">
+                  <div class="mb-3">
+                    <label for="emailService" class="form-label">Serviço de Email</label>
+                    <select class="form-select" id="emailService" required>
+                      <option value="smtp">SMTP Personalizado</option>
+                      <option value="sendgrid">SendGrid</option>
+                      <option value="mailgun">Mailgun</option>
+                      <option value="ses">Amazon SES</option>
+                    </select>
+                  </div>
+                  
+                  <div id="smtpSettings">
+                    <div class="mb-3">
+                      <label for="smtpHost" class="form-label">Servidor SMTP</label>
+                      <input type="text" class="form-control" id="smtpHost" value="smtp.gmail.com">
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <label for="smtpPort" class="form-label">Porta</label>
+                        <input type="number" class="form-control" id="smtpPort" value="587">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="smtpSecurity" class="form-label">Segurança</label>
+                        <select class="form-select" id="smtpSecurity">
+                          <option value="tls">TLS</option>
+                          <option value="ssl">SSL</option>
+                          <option value="none">Nenhuma</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="smtpUsername" class="form-label">Usuário</label>
+                      <input type="email" class="form-control" id="smtpUsername" value="contato@amorpet.com.br">
+                    </div>
+                    <div class="mb-3">
+                      <label for="smtpPassword" class="form-label">Senha</label>
+                      <input type="password" class="form-control" id="smtpPassword" value="********">
+                    </div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="senderName" class="form-label">Nome do Remetente</label>
+                    <input type="text" class="form-control" id="senderName" value="Amor Pet">
+                  </div>
+                  <div class="mb-3">
+                    <label for="senderEmail" class="form-label">Email do Remetente</label>
+                    <input type="email" class="form-control" id="senderEmail" value="contato@amorpet.com.br">
+                  </div>
+                  
+                  <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" id="testEmailBtn">Enviar Email de Teste</button>
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            
+            <div class="card mt-4">
+              <div class="card-header">
+                <h3>Modelos de Email</h3>
+              </div>
+              <div class="card-body">
+                <ul class="nav nav-pills mb-3" id="emailTemplatesTabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="welcome-tab" data-bs-toggle="pill" data-bs-target="#welcome" type="button" role="tab" aria-controls="welcome" aria-selected="true">Boas-vindas</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="appointment-tab" data-bs-toggle="pill" data-bs-target="#appointment" type="button" role="tab" aria-controls="appointment" aria-selected="false">Confirmação de Agendamento</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reminder-tab" data-bs-toggle="pill" data-bs-target="#reminder" type="button" role="tab" aria-controls="reminder" aria-selected="false">Lembrete</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="plan-tab" data-bs-toggle="pill" data-bs-target="#plan" type="button" role="tab" aria-controls="plan" aria-selected="false">Compra de Plano</button>
+                  </li>
+                </ul>
+                
+                <div class="tab-content" id="emailTemplatesContent">
+                  <div class="tab-pane fade show active" id="welcome" role="tabpanel" aria-labelledby="welcome-tab">
+                    <form id="welcomeEmailForm">
+                      <div class="mb-3">
+                        <label for="welcomeSubject" class="form-label">Assunto</label>
+                        <input type="text" class="form-control" id="welcomeSubject" value="Bem-vindo à Amor Pet!">
+                      </div>
+                      <div class="mb-3">
+                        <label for="welcomeContent" class="form-label">Conteúdo</label>
+                        <textarea class="form-control" id="welcomeContent" rows="10">Olá {nome},
+
+Seja bem-vindo à Amor Pet! Estamos muito felizes em tê-lo como cliente.
+
+Aqui na Amor Pet, nos dedicamos a oferecer o melhor cuidado para o seu pet, com serviços de banho e tosa de alta qualidade.
+
+Para agendar um serviço, basta acessar nosso site ou entrar em contato conosco.
+
+Atenciosamente,
+Equipe Amor Pet</textarea>
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Salvar Modelo</button>
+                      </div>
+                    </form>
+                  </div>
+                  
+                  <div class="tab-pane fade" id="appointment" role="tabpanel" aria-labelledby="appointment-tab">
+                    <form id="appointmentEmailForm">
+                      <div class="mb-3">
+                        <label for="appointmentSubject" class="form-label">Assunto</label>
+                        <input type="text" class="form-control" id="appointmentSubject" value="Confirmação de Agendamento - Amor Pet">
+                      </div>
+                      <div class="mb-3">
+                        <label for="appointmentContent" class="form-label">Conteúdo</label>
+                        <textarea class="form-control" id="appointmentContent" rows="10">Olá {nome},
+
+Seu agendamento na Amor Pet foi confirmado com sucesso!
+
+Detalhes do agendamento:
+- Data: {data}
+- Horário: {horario}
+- Pet: {pet}
+- Serviço: {servico}
+- Valor: {valor}
+
+Por favor, chegue com 10 minutos de antecedência.
+
+Se precisar reagendar, entre em contato conosco com pelo menos 24 horas de antecedência.
+
+Atenciosamente,
+Equipe Amor Pet</textarea>
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Salvar Modelo</button>
+                      </div>
+                    </form>
+                  </div>
+                  
+                  <div class="tab-pane fade" id="reminder" role="tabpanel" aria-labelledby="reminder-tab">
+                    <form id="reminderEmailForm">
+                      <div class="mb-3">
+                        <label for="reminderSubject" class="form-label">Assunto</label>
+                        <input type="text" class="form-control" id="reminderSubject" value="Lembrete: Seu agendamento na Amor Pet">
+                      </div>
+                      <div class="mb-3">
+                        <label for="reminderContent" class="form-label">Conteúdo</label>
+                        <textarea class="form-control" id="reminderContent" rows="10">Olá {nome},
+
+Este é um lembrete sobre seu agendamento na Amor Pet para amanhã.
+
+Detalhes do agendamento:
+- Data: {data}
+- Horário: {horario}
+- Pet: {pet}
+- Serviço: {servico}
+
+Por favor, chegue com 10 minutos de antecedência.
+
+Se precisar reagendar, entre em contato conosco o quanto antes.
+
+Atenciosamente,
+Equipe Amor Pet</textarea>
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Salvar Modelo</button>
+                      </div>
+                    </form>
+                  </div>
+                  
+                  <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="plan-tab">
+                    <form id="planEmailForm">
+                      <div class="mb-3">
+                        <label for="planSubject" class="form-label">Assunto</label>
+                        <input type="text" class="form-control" id="planSubject" value="Confirmação de Compra de Plano - Amor Pet">
+                      </div>
+                      <div class="mb-3">
+                        <label for="planContent" class="form-label">Conteúdo</label>
+                        <textarea class="form-control" id="planContent" rows="10">Olá {nome},
+
+Sua compra de plano na Amor Pet foi confirmada com sucesso!
+
+Detalhes do plano:
+- Plano: {plano}
+- Serviços incluídos: {servicos}
+- Validade: {validade}
+- Valor: {valor}
+
+Para agendar um serviço utilizando seu plano, basta acessar nosso site ou entrar em contato conosco.
+
+Atenciosamente,
+Equipe Amor Pet</textarea>
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Salvar Modelo</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Configurações de Pagamento -->
+          <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3>Configurações de Pix</h3>
+              </div>
+              <div class="card-body">
+                <form id="pixForm">
+                  <div class="mb-3">
+                    <label for="pixProvider" class="form-label">Provedor de Pix</label>
+                    <select class="form-select" id="pixProvider" required>
+                      <option value="generic">Genérico (Chave Pix)</option>
+                      <option value="mercadopago">Mercado Pago</option>
+                      <option value="pagseguro">PagSeguro</option>
+                      <option value="stripe">Stripe</option>
+                    </select>
+                  </div>
+                  
+                  <div id="genericPixSettings">
+                    <div class="mb-3">
+                      <label for="pixKeyType" class="form-label">Tipo de Chave</label>
+                      <select class="form-select" id="pixKeyType">
+                        <option value="cpf">CPF</option>
+                        <option value="cnpj">CNPJ</option>
+                        <option value="email">Email</option>
+                        <option value="phone">Telefone</option>
+                        <option value="random">Chave Aleatória</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="pixKey" class="form-label">Chave Pix</label>
+                      <input type="text" class="form-control" id="pixKey" value="12345678900">
+                    </div>
+                    <div class="mb-3">
+                      <label for="pixName" class="form-label">Nome do Beneficiário</label>
+                      <input type="text" class="form-control" id="pixName" value="Amor Pet Ltda">
+                    </div>
+                    <div class="mb-3">
+                      <label for="pixCity" class="form-label">Cidade</label>
+                      <input type="text" class="form-control" id="pixCity" value="São Paulo">
+                    </div>
+                  </div>
+                  
+                  <div id="apiPixSettings" style="display: none;">
+                    <div class="mb-3">
+                      <label for="pixApiKey" class="form-label">Chave de API</label>
+                      <input type="text" class="form-control" id="pixApiKey" placeholder="Sua chave de API">
+                    </div>
+                    <div class="mb-3">
+                      <label for="pixApiSecret" class="form-label">Chave Secreta</label>
+                      <input type="password" class="form-control" id="pixApiSecret" placeholder="Sua chave secreta">
+                    </div>
+                    <div class="mb-3">
+                      <label for="pixWebhookUrl" class="form-label">URL de Webhook</label>
+                      <input type="text" class="form-control" id="pixWebhookUrl" value="https://amorpet.com.br/api/webhooks/pix" readonly>
+                      <small class="form-text text-muted">Configure esta URL no painel do seu provedor de pagamento.</small>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="pixTestMode" checked>
+                    <label class="form-check-label" for="pixTestMode">Modo de Teste</label>
+                    <small class="form-text text-muted d-block">No modo de teste, os pagamentos são simulados e não há transações reais.</small>
+                  </div>
+                  
+                  <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" id="testPixBtn">Testar Configuração</button>
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            
+            <div class="card mt-4">
+              <div class="card-header">
+                <h3>Políticas de Pagamento</h3>
+              </div>
+              <div class="card-body">
+                <form id="paymentPoliciesForm">
+                  <div class="mb-3">
+                    <label for="cancellationPolicy" class="form-label">Política de Cancelamento</label>
+                    <select class="form-select" id="cancellationPolicy">
+                      <option value="24h">24 horas de antecedência</option>
+                      <option value="48h" selected>48 horas de antecedência</option>
+                      <option value="72h">72 horas de antecedência</option>
+                    </select>
+                    <small class="form-text text-muted">Tempo mínimo para cancelamento sem cobrança.</small>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="cancellationFee" class="form-label">Taxa de Cancelamento Tardio</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="cancellationFee" value="50" min="0" max="100">
+                      <span class="input-group-text">%</span>
+                    </div>
+                    <small class="form-text text-muted">Percentual cobrado para cancelamentos fora do prazo.</small>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="noShowPolicy" class="form-label">Política de Não Comparecimento</label>
+                    <select class="form-select" id="noShowPolicy">
+                      <option value="full">Cobrança integral</option>
+                      <option value="partial" selected>Cobrança parcial (50%)</option>
+                      <option value="none">Sem cobrança</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="refundPolicy" class="form-label">Política de Reembolso</label>
+                    <textarea class="form-control" id="refundPolicy" rows="4">Reembolsos são processados em até 7 dias úteis após a solicitação. Cancelamentos dentro do prazo recebem reembolso integral. Cancelamentos fora do prazo estão sujeitos à taxa de cancelamento. Não comparecimentos estão sujeitos à política específica.</textarea>
+                  </div>
+                  
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Configurações de Usuários -->
+          <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h3>Usuários Administrativos</h3>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userModal">
+                  <i class="fas fa-plus"></i> Adicionar Usuário
+                </button>
+              </div>
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Função</th>
+                        <th>Status</th>
+                        <th>Último Acesso</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody id="adminUsersList">
+                      <tr>
+                        <td>1</td>
+                        <td>Administrador</td>
+                        <td>admin@amorpet.com.br</td>
+                        <td>Administrador</td>
+                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>24/04/2025 10:30</td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <button class="btn btn-outline-primary edit-user-btn" data-id="1" data-bs-toggle="modal" data-bs-target="#userModal" title="Editar"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-outline-danger delete-user-btn" data-id="1" title="Excluir"><i class="fas fa-trash"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Gerente</td>
+                        <td>gerente@amorpet.com.br</td>
+                        <td>Gerente</td>
+                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>23/04/2025 16:45</td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <button class="btn btn-outline-primary edit-user-btn" data-id="2" data-bs-toggle="modal" data-bs-target="#userModal" title="Editar"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-outline-danger delete-user-btn" data-id="2" title="Excluir"><i class="fas fa-trash"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>Atendente</td>
+                        <td>atendente@amorpet.com.br</td>
+                        <td>Atendente</td>
+                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>24/04/2025 09:15</td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <button class="btn btn-outline-primary edit-user-btn" data-id="3" data-bs-toggle="modal" data-bs-target="#userModal" title="Editar"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-outline-danger delete-user-btn" data-id="3" title="Excluir"><i class="fas fa-trash"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card mt-4">
+              <div class="card-header">
+                <h3>Configurações de Segurança</h3>
+              </div>
+              <div class="card-body">
+                <form id="securityForm">
+                  <div class="mb-3">
+                    <label for="passwordPolicy" class="form-label">Política de Senha</label>
+                    <select class="form-select" id="passwordPolicy">
+                      <option value="simple">Simples (mínimo 6 caracteres)</option>
+                      <option value="medium" selected>Média (mínimo 8 caracteres, letras e números)</option>
+                      <option value="strong">Forte (mínimo 10 caracteres, letras, números e símbolos)</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="passwordExpiration" class="form-label">Expiração de Senha</label>
+                    <select class="form-select" id="passwordExpiration">
+                      <option value="never">Nunca</option>
+                      <option value="30" selected>30 dias</option>
+                      <option value="60">60 dias</option>
+                      <option value="90">90 dias</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="twoFactorAuth">
+                    <label class="form-check-label" for="twoFactorAuth">Habilitar Autenticação de Dois Fatores</label>
+                    <small class="form-text text-muted d-block">Requer verificação adicional ao fazer login.</small>
+                  </div>
+                  
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="loginAttempts" checked>
+                    <label class="form-check-label" for="loginAttempts">Limitar Tentativas de Login</label>
+                    <small class="form-text text-muted d-block">Bloqueia o acesso após 5 tentativas falhas.</small>
+                  </div>
+                  
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal de Usuário -->
+  <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userModalLabel">Adicionar Usuário</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="userForm">
+            <input type="hidden" id="userId">
+            <div class="mb-3">
+              <label for="userName" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="userName" required>
+            </div>
+            <div class="mb-3">
+              <label for="userEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="userEmail" required>
+            </div>
+            <div class="mb-3">
+              <label for="userPassword" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="userPassword">
+              <small class="form-text text-muted" id="passwordHint">Deixe em branco para manter a senha atual.</small>
+            </div>
+            <div class="mb-3">
+              <label for="userRole" class="form-label">Função</label>
+              <select class="form-select" id="userRole" required>
+                <option value="admin">Administrador</option>
+                <option value="manager">Gerente</option>
+                <option value="attendant">Atendente</option>
+              </select>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="userActive" checked>
+              <label class="form-check-label" for="userActive">Ativo</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="saveUserBtn">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação -->
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmModalLabel">Confirmar Exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body" id="confirmModalBody">
+          Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle sidebar
+      document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.querySelector('.admin-layout').classList.toggle('sidebar-collapsed');
+      });
+      
+      // Logout button
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        // Em um sistema real, aqui seria feito o logout
+        window.location.href = '../login.html';
+      });
+      
+      // Formulário de informações gerais
+      document.getElementById('generalForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Informações gerais salvas com sucesso!');
+      });
+      
+      // Formulário de horários
+      document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Configurações de horários salvas com sucesso!');
+      });
+      
+      // Adicionar data bloqueada
+      document.getElementById('addBlockedDateBtn').addEventListener('click', function() {
+        const date = document.getElementById('blockedDate').value;
+        const reason = document.getElementById('blockedReason').value;
+        
+        if (!date) {
+          alert('Por favor, selecione uma data.');
+          return;
+        }
+        
+        if (!reason) {
+          alert('Por favor, informe o motivo do bloqueio.');
+          return;
+        }
+        
+        // Formatar data
+        const formattedDate = new Date(date).toLocaleDateString('pt-BR');
+        
+        // Adicionar à tabela
+        const table = document.getElementById('blockedDatesTable').getElementsByTagName('tbody')[0];
+        const newRow = table.insertRow();
+        newRow.innerHTML = `
+          <td>${formattedDate}</td>
+          <td>${reason}</td>
+          <td>
+            <button type="button" class="btn btn-sm btn-danger remove-date-btn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        `;
+        
+        // Configurar botão de remover
+        newRow.querySelector('.remove-date-btn').addEventListener('click', function() {
+          newRow.remove();
+        });
+        
+        // Limpar campos
+        document.getElementById('blockedDate').value = '';
+        document.getElementById('blockedReason').value = '';
+      });
+      
+      // Configurar botões de remover data bloqueada existentes
+      document.querySelectorAll('.remove-date-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          this.closest('tr').remove();
+        });
+      });
+      
+      // Alternar configurações de Pix com base no provedor selecionado
+      document.getElementById('pixProvider').addEventListener('change', function() {
+        const provider = this.value;
+        const genericSettings = document.getElementById('genericPixSettings');
+        const apiSettings = document.getElementById('apiPixSettings');
+        
+        if (provider === 'generic') {
+          genericSettings.style.display = 'block';
+          apiSettings.style.display = 'none';
+        } else {
+          genericSettings.style.display = 'none';
+          apiSettings.style.display = 'block';
+        }
+      });
+      
+      // Formulário de configurações de Pix
+      document.getElementById('pixForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Configurações de Pix salvas com sucesso!');
+      });
+      
+      // Botão de teste de Pix
+      document.getElementById('testPixBtn').addEventListener('click', function() {
+        alert('Configuração de Pix testada com sucesso!');
+      });
+      
+      // Formulário de políticas de pagamento
+      document.getElementById('paymentPoliciesForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Políticas de pagamento salvas com sucesso!');
+      });
+      
+      // Formulário de configurações de email
+      document.getElementById('emailForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Configurações de email salvas com sucesso!');
+      });
+      
+      // Botão de teste de email
+      document.getElementById('testEmailBtn').addEventListener('click', function() {
+        alert('Email de teste enviado com sucesso!');
+      });
+      
+      // Formulários de modelos de email
+      document.querySelectorAll('#welcomeEmailForm, #appointmentEmailForm, #reminderEmailForm, #planEmailForm').forEach(form => {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          alert('Modelo de email salvo com sucesso!');
+        });
+      });
+      
+      // Formulário de segurança
+      document.getElementById('securityForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Configurações de segurança salvas com sucesso!');
+      });
+      
+      // Modal de usuário
+      const userModal = document.getElementById('userModal');
+      const userModalLabel = document.getElementById('userModalLabel');
+      const userForm = document.getElementById('userForm');
+      const userId = document.getElementById('userId');
+      const userName = document.getElementById('userName');
+      const userEmail = document.getElementById('userEmail');
+      const userPassword = document.getElementById('userPassword');
+      const passwordHint = document.getElementById('passwordHint');
+      const userRole = document.getElementById('userRole');
+      const userActive = document.getElementById('userActive');
+      const saveUserBtn = document.getElementById('saveUserBtn');
+      
+      // Resetar formulário ao abrir o modal para adicionar
+      userModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
+        
+        // Se não for um botão de edição, é um botão de adicionar
+        if (!button || !button.classList.contains('edit-user-btn')) {
+          userModalLabel.textContent = 'Adicionar Usuário';
+          userForm.reset();
+          userId.value = '';
+          passwordHint.textContent = 'A senha deve ter pelo menos 8 caracteres.';
+          userPassword.required = true;
+          return;
+        }
+        
+        // Se for um botão de edição, preencher o formulário com os dados do usuário
+        const id = button.getAttribute('data-id');
+        
+        // Simulação:
+        let userData;
+        if (id === '1') {
+          userData = {
+            id: 1,
+            name: 'Administrador',
+            email: 'admin@amorpet.com.br',
+            role: 'admin',
+            active: true
+          };
+        } else if (id === '2') {
+          userData = {
+            id: 2,
+            name: 'Gerente',
+            email: 'gerente@amorpet.com.br',
+            role: 'manager',
+            active: true
+          };
+        } else if (id === '3') {
+          userData = {
+            id: 3,
+            name: 'Atendente',
+            email: 'atendente@amorpet.com.br',
+            role: 'attendant',
+            active: true
+          };
+        }
+        
+        if (userData) {
+          userModalLabel.textContent = 'Editar Usuário';
+          userId.value = userData.id;
+          userName.value = userData.name;
+          userEmail.value = userData.email;
+          userPassword.value = '';
+          passwordHint.textContent = 'Deixe em branco para manter a senha atual.';
+          userPassword.required = false;
+          userRole.value = userData.role;
+          userActive.checked = userData.active;
+        }
+      });
+      
+      // Salvar usuário
+      saveUserBtn.addEventListener('click', function() {
+        // Verificar se o formulário é válido
+        if (!userForm.checkValidity()) {
+          userForm.reportValidity();
+          return;
+        }
+        
+        // Obter dados do formulário
+        const id = userId.value;
+        const name = userName.value;
+        const email = userEmail.value;
+        const password = userPassword.value;
+        const role = userRole.value;
+        const active = userActive.checked;
+        
+        console.log(id ? 'Editando usuário:' : 'Adicionando usuário:', { id, name, email, password, role, active });
+        
+        // Fechar o modal
+        bootstrap.Modal.getInstance(userModal).hide();
+        
+        // Mostrar mensagem de sucesso
+        alert(id ? 'Usuário atualizado com sucesso!' : 'Usuário adicionado com sucesso!');
+      });
+      
+      // Botões de excluir usuário
+      document.querySelectorAll('.delete-user-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          
+          // Simulação:
+          let userData;
+          if (id === '1') {
+            userData = {
+              id: 1,
+              name: 'Administrador',
+              email: 'admin@amorpet.com.br'
+            };
+          } else if (id === '2') {
+            userData = {
+              id: 2,
+              name: 'Gerente',
+              email: 'gerente@amorpet.com.br'
+            };
+          } else if (id === '3') {
+            userData = {
+              id: 3,
+              name: 'Atendente',
+              email: 'atendente@amorpet.com.br'
+            };
+          }
+          
+          if (userData) {
+            // Configurar modal de confirmação
+            document.getElementById('confirmModalLabel').textContent = 'Confirmar Exclusão';
+            document.getElementById('confirmModalBody').textContent = `Tem certeza que deseja excluir o usuário "${userData.name}" (${userData.email})? Esta ação não pode ser desfeita.`;
+            
+            // Configurar botão de confirmação
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            confirmDeleteBtn.setAttribute('data-id', id);
+            
+            // Abrir modal de confirmação
+            new bootstrap.Modal(document.getElementById('confirmModal')).show();
+          }
+        });
+      });
+      
+      // Confirmar exclusão de usuário
+      document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+        const id = this.getAttribute('data-id');
+        
+        console.log('Excluindo usuário:', id);
+        
+        // Fechar o modal
+        bootstrap.Modal.getInstance(document.getElementById('confirmModal')).hide();
+        
+        // Mostrar mensagem de sucesso
+        alert('Usuário excluído com sucesso!');
+      });
+      
+      // Alternar status dos dias da semana
+      document.querySelectorAll('#mondayStatus, #tuesdayStatus, #wednesdayStatus, #thursdayStatus, #fridayStatus, #saturdayStatus, #sundayStatus').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          const day = this.id.replace('Status', '');
+          const open = document.getElementById(`${day}Open`);
+          const close = document.getElementById(`${day}Close`);
+          const capacity = document.getElementById(`${day}Capacity`);
+          
+          if (this.checked) {
+            open.disabled = false;
+            close.disabled = false;
+            capacity.disabled = false;
+            this.nextElementSibling.textContent = 'Aberto';
+          } else {
+            open.disabled = true;
+            close.disabled = true;
+            capacity.disabled = true;
+            this.nextElementSibling.textContent = 'Fechado';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

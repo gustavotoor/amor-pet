@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatórios - Administração Amor Pet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../images/logo.svg" alt="Amor Pet" class="logo">
+        <h1>Administração</h1>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="agendamentos.html"><i class="fas fa-calendar-alt"></i> Agendamentos</a>
+          </li>
+          <li>
+            <a href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+          </li>
+          <li>
+            <a href="servicos.html"><i class="fas fa-concierge-bell"></i> Serviços</a>
+          </li>
+          <li>
+            <a href="planos.html"><i class="fas fa-tags"></i> Planos</a>
+          </li>
+          <li class="active">
+            <a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
+          </li>
+          <li>
+            <a href="configuracoes.html"><i class="fas fa-cog"></i> Configurações</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="admin-content">
+      <header class="content-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h2>Relatórios</h2>
+        </div>
+        <div class="header-right">
+          <div class="admin-profile">
+            <span id="adminName">Admin</span>
+            <img src="../images/admin-avatar.png" alt="Admin" class="avatar">
+          </div>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- Filtros de Período -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3>Período de Análise</h3>
+          </div>
+          <div class="card-body">
+            <form class="row g-3" id="periodForm">
+              <div class="col-md-4">
+                <label for="startDate" class="form-label">Data Inicial</label>
+                <input type="date" class="form-control" id="startDate">
+              </div>
+              <div class="col-md-4">
+                <label for="endDate" class="form-label">Data Final</label>
+                <input type="date" class="form-control" id="endDate">
+              </div>
+              <div class="col-md-4 d-flex align-items-end">
+                <div class="btn-group w-100">
+                  <button type="button" class="btn btn-outline-secondary" id="thisMonthBtn">Este Mês</button>
+                  <button type="button" class="btn btn-outline-secondary" id="lastMonthBtn">Mês Anterior</button>
+                  <button type="button" class="btn btn-outline-secondary" id="thisYearBtn">Este Ano</button>
+                </div>
+              </div>
+              <div class="col-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-filter"></i> Aplicar Filtro
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Resumo Financeiro -->
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Receita Total</h5>
+                <h2 class="card-value text-success">R$ 5.840,00</h2>
+                <p class="card-trend">
+                  <i class="fas fa-arrow-up text-success"></i> 12% em relação ao período anterior
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Serviços Individuais</h5>
+                <h2 class="card-value">R$ 3.200,00</h2>
+                <p class="card-trend">
+                  <i class="fas fa-arrow-up text-success"></i> 8% em relação ao período anterior
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Planos Vendidos</h5>
+                <h2 class="card-value">R$ 2.640,00</h2>
+                <p class="card-trend">
+                  <i class="fas fa-arrow-up text-success"></i> 15% em relação ao período anterior
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Ticket Médio</h5>
+                <h2 class="card-value">R$ 73,00</h2>
+                <p class="card-trend">
+                  <i class="fas fa-arrow-up text-success"></i> 5% em relação ao período anterior
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gráficos -->
+        <div class="row mb-4">
+          <div class="col-md-8">
+            <div class="card h-100">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h3>Receita por Período</h3>
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-outline-secondary active" id="revenueDaily">Diário</button>
+                  <button class="btn btn-sm btn-outline-secondary" id="revenueWeekly">Semanal</button>
+                  <button class="btn btn-sm btn-outline-secondary" id="revenueMonthly">Mensal</button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="revenueChart" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-header">
+                <h3>Distribuição de Serviços</h3>
+              </div>
+              <div class="card-body">
+                <canvas id="servicesChart" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-header">
+                <h3>Agendamentos por Dia da Semana</h3>
+              </div>
+              <div class="card-body">
+                <canvas id="weekdayChart" height="250"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-header">
+                <h3>Planos Vendidos</h3>
+              </div>
+              <div class="card-body">
+                <canvas id="plansChart" height="250"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tabela de Agendamentos -->
+        <div class="card mb-4">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Agendamentos no Período</h3>
+            <button class="btn btn-outline-secondary" id="exportAppointmentsBtn">
+              <i class="fas fa-file-export"></i> Exportar
+            </button>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Cliente</th>
+                    <th>Pet</th>
+                    <th>Serviço</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="appointmentsList">
+                  <tr>
+                    <td>24/04/2025</td>
+                    <td>Maria Silva</td>
+                    <td>Rex (Labrador)</td>
+                    <td>Banho</td>
+                    <td>R$ 50,00</td>
+                    <td><span class="badge bg-success">Concluído</span></td>
+                  </tr>
+                  <tr>
+                    <td>24/04/2025</td>
+                    <td>João Pereira</td>
+                    <td>Luna (Siamês)</td>
+                    <td>Banho e Tosa</td>
+                    <td>R$ 80,00</td>
+                    <td><span class="badge bg-success">Concluído</span></td>
+                  </tr>
+                  <tr>
+                    <td>25/04/2025</td>
+                    <td>Ana Oliveira</td>
+                    <td>Thor (Golden Retriever)</td>
+                    <td>Banho</td>
+                    <td>R$ 50,00</td>
+                    <td><span class="badge bg-success">Concluído</span></td>
+                  </tr>
+                  <tr>
+                    <td>25/04/2025</td>
+                    <td>Carlos Santos</td>
+                    <td>Mel (Poodle)</td>
+                    <td>Banho e Tosa</td>
+                    <td>R$ 80,00</td>
+                    <td><span class="badge bg-success">Concluído</span></td>
+                  </tr>
+                  <tr>
+                    <td>26/04/2025</td>
+                    <td>Fernanda Lima</td>
+                    <td>Nina (Persa)</td>
+                    <td>Banho</td>
+                    <td>R$ 50,00</td>
+                    <td><span class="badge bg-success">Concluído</span></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr class="table-light fw-bold">
+                    <td colspan="4" class="text-end">Total:</td>
+                    <td>R$ 310,00</td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tabela de Planos Vendidos -->
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Planos Vendidos no Período</h3>
+            <button class="btn btn-outline-secondary" id="exportPlansBtn">
+              <i class="fas fa-file-export"></i> Exportar
+            </button>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Cliente</th>
+                    <th>Plano</th>
+                    <th>Valor</th>
+                  </tr>
+                </thead>
+                <tbody id="plansList">
+                  <tr>
+                    <td>20/04/2025</td>
+                    <td>Maria Silva</td>
+                    <td>Plano 4 Banhos</td>
+                    <td>R$ 180,00</td>
+                  </tr>
+                  <tr>
+                    <td>21/04/2025</td>
+                    <td>João Pereira</td>
+                    <td>Plano 2 Banhos e Tosas</td>
+                    <td>R$ 136,00</td>
+                  </tr>
+                  <tr>
+                    <td>22/04/2025</td>
+                    <td>Ana Oliveira</td>
+                    <td>Plano 6 Banhos</td>
+                    <td>R$ 240,00</td>
+                  </tr>
+                  <tr>
+                    <td>23/04/2025</td>
+                    <td>Carlos Santos</td>
+                    <td>Plano 4 Banhos</td>
+                    <td>R$ 180,00</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr class="table-light fw-bold">
+                    <td colspan="3" class="text-end">Total:</td>
+                    <td>R$ 736,00</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle sidebar
+      document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.querySelector('.admin-layout').classList.toggle('sidebar-collapsed');
+      });
+      
+      // Logout button
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        // Em um sistema real, aqui seria feito o logout
+        window.location.href = '../login.html';
+      });
+      
+      // Configurar botões de período
+      const today = new Date();
+      const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      
+      // Definir valores iniciais para o mês atual
+      document.getElementById('startDate').valueAsDate = firstDayOfMonth;
+      document.getElementById('endDate').valueAsDate = lastDayOfMonth;
+      
+      // Botão "Este Mês"
+      document.getElementById('thisMonthBtn').addEventListener('click', function() {
+        document.getElementById('startDate').valueAsDate = firstDayOfMonth;
+        document.getElementById('endDate').valueAsDate = lastDayOfMonth;
+      });
+      
+      // Botão "Mês Anterior"
+      document.getElementById('lastMonthBtn').addEventListener('click', function() {
+        const firstDayLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+        const lastDayLastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        document.getElementById('startDate').valueAsDate = firstDayLastMonth;
+        document.getElementById('endDate').valueAsDate = lastDayLastMonth;
+      });
+      
+      // Botão "Este Ano"
+      document.getElementById('thisYearBtn').addEventListener('click', function() {
+        const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
+        const lastDayOfYear = new Date(today.getFullYear(), 11, 31);
+        document.getElementById('startDate').valueAsDate = firstDayOfYear;
+        document.getElementById('endDate').valueAsDate = lastDayOfYear;
+      });
+      
+      // Formulário de período
+      document.getElementById('periodForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // para buscar os dados do período selecionado
+        
+        // Exemplo:
+        // fetchReportData(startDate, endDate);
+        
+        console.log('Filtro aplicado:', { startDate, endDate });
+        
+        // Atualizar gráficos com novos dados
+        updateCharts();
+      });
+      
+      // Botões de exportação
+      document.getElementById('exportAppointmentsBtn').addEventListener('click', function() {
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // para exportar os dados de agendamentos
+        
+        // Exemplo:
+        // exportAppointments();
+        
+        alert('Relatório de agendamentos exportado com sucesso!');
+      });
+      
+      document.getElementById('exportPlansBtn').addEventListener('click', function() {
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // para exportar os dados de planos vendidos
+        
+        // Exemplo:
+        // exportPlans();
+        
+        alert('Relatório de planos vendidos exportado com sucesso!');
+      });
+      
+      // Botões de visualização de receita
+      document.getElementById('revenueDaily').addEventListener('click', function() {
+        setActiveButton(this, ['revenueDaily', 'revenueWeekly', 'revenueMonthly']);
+        updateRevenueChart('daily');
+      });
+      
+      document.getElementById('revenueWeekly').addEventListener('click', function() {
+        setActiveButton(this, ['revenueDaily', 'revenueWeekly', 'revenueMonthly']);
+        updateRevenueChart('weekly');
+      });
+      
+      document.getElementById('revenueMonthly').addEventListener('click', function() {
+        setActiveButton(this, ['revenueDaily', 'revenueWeekly', 'revenueMonthly']);
+        updateRevenueChart('monthly');
+      });
+      
+      // Inicializar gráficos
+      initCharts();
+    });
+    
+    // Função para definir botão ativo
+    function setActiveButton(button, buttonIds) {
+      buttonIds.forEach(id => {
+        document.getElementById(id).classList.remove('active');
+      });
+      button.classList.add('active');
+    }
+    
+    // Variáveis para armazenar instâncias dos gráficos
+    let revenueChart, servicesChart, weekdayChart, plansChart;
+    
+    // Função para inicializar gráficos
+    function initCharts() {
+      // Gráfico de Receita
+      const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+      revenueChart = new Chart(revenueCtx, {
+        type: 'line',
+        data: {
+          labels: ['20/04', '21/04', '22/04', '23/04', '24/04', '25/04', '26/04'],
+          datasets: [{
+            label: 'Receita (R$)',
+            data: [250, 320, 180, 450, 310, 280, 200],
+            backgroundColor: 'rgba(168, 213, 186, 0.2)',
+            borderColor: '#A8D5BA',
+            borderWidth: 2,
+            tension: 0.3,
+            pointBackgroundColor: '#A8D5BA'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return 'R$ ' + context.raw.toFixed(2);
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  return 'R$ ' + value;
+                }
+              }
+            }
+          }
+        }
+      });
+      
+      // Gráfico de Distribuição de Serviços
+      const servicesCtx = document.getElementById('servicesChart').getContext('2d');
+      servicesChart = new Chart(servicesCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Banho', 'Banho e Tosa', 'Banho Premium'],
+          datasets: [{
+            data: [60, 30, 10],
+            backgroundColor: ['#A8D5BA', '#B3D4E5', '#F4A261'],
+            borderColor: '#ffffff',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = context.label || '';
+                  const value = context.raw || 0;
+                  const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                  const percentage = Math.round((value / total) * 100);
+                  return `${label}: ${percentage}% (${value})`;
+                }
+              }
+            }
+          }
+        }
+      });
+      
+      // Gráfico de Agendamentos por Dia da Semana
+      const weekdayCtx = document.getElementById('weekdayChart').getContext('2d');
+      weekdayChart = new Chart(weekdayCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+          datasets: [{
+            label: 'Agendamentos',
+            data: [12, 8, 10, 15, 20, 25, 5],
+            backgroundColor: '#B3D4E5',
+            borderColor: '#B3D4E5',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                precision: 0
+              }
+            }
+          }
+        }
+      });
+      
+      // Gráfico de Planos Vendidos
+      const plansCtx = document.getElementById('plansChart').getContext('2d');
+      plansChart = new Chart(plansCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Plano 4 Banhos', 'Plano 2 Banhos e Tosas', 'Plano 6 Banhos', 'Plano Premium'],
+          datasets: [{
+            label: 'Quantidade Vendida',
+            data: [8, 5, 3, 2],
+            backgroundColor: '#F5E8C7',
+            borderColor: '#F5E8C7',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                precision: 0
+              }
+            }
+          }
+        }
+      });
+    }
+    
+    // Função para atualizar gráfico de receita
+    function updateRevenueChart(period) {
+      let labels, data;
+      
+      switch (period) {
+        case 'daily':
+          labels = ['20/04', '21/04', '22/04', '23/04', '24/04', '25/04', '26/04'];
+          data = [250, 320, 180, 450, 310, 280, 200];
+          break;
+        case 'weekly':
+          labels = ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'];
+          data = [1200, 1500, 1350, 1790];
+          break;
+        case 'monthly':
+          labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'];
+          data = [4500, 5200, 4800, 5840, 0, 0];
+          break;
+      }
+      
+      revenueChart.data.labels = labels;
+      revenueChart.data.datasets[0].data = data;
+      revenueChart.update();
+    }
+    
+    // Função para atualizar todos os gráficos
+    function updateCharts() {
+      // Em um sistema real, aqui seriam utilizados os dados retornados pela API
+      
+      // Atualizar gráfico de receita (mantendo o período selecionado)
+      const activeButton = document.querySelector('#revenueDaily.active, #revenueWeekly.active, #revenueMonthly.active');
+      if (activeButton) {
+        const period = activeButton.id.replace('revenue', '').toLowerCase();
+        updateRevenueChart(period);
+      } else {
+        updateRevenueChart('daily');
+      }
+      
+      // Atualizar gráfico de distribuição de serviços
+      servicesChart.data.datasets[0].data = [60, 30, 10];
+      servicesChart.update();
+      
+      // Atualizar gráfico de agendamentos por dia da semana
+      weekdayChart.data.datasets[0].data = [12, 8, 10, 15, 20, 25, 5];
+      weekdayChart.update();
+      
+      // Atualizar gráfico de planos vendidos
+      plansChart.data.datasets[0].data = [8, 5, 3, 2];
+      plansChart.update();
+    }
+    
+    // Função para buscar dados de relatório (em um sistema real)
+    function fetchReportData(startDate, endDate) {
+      fetch(`/api/admin/reports?start_date=${startDate}&end_date=${endDate}`, {
+        headers: {
+          'Authorization': `Bearer ${getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao buscar dados do relatório');
+        }
+      })
+      .then(data => {
+        // Atualizar resumo financeiro
+        document.querySelector('.card-value:nth-of-type(1)').textContent = `R$ ${data.total_revenue.toFixed(2)}`;
+        document.querySelector('.card-value:nth-of-type(2)').textContent = `R$ ${data.service_revenue.toFixed(2)}`;
+        document.querySelector('.card-value:nth-of-type(3)').textContent = `R$ ${data.plan_revenue.toFixed(2)}`;
+        document.querySelector('.card-value:nth-of-type(4)').textContent = `R$ ${data.average_ticket.toFixed(2)}`;
+        
+        // Atualizar gráficos
+        updateChartsWithData(data);
+        
+        // Atualizar tabelas
+        renderAppointmentsTable(data.appointments);
+        renderPlansTable(data.plans);
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para atualizar gráficos com dados da API (em um sistema real)
+    function updateChartsWithData(data) {
+      // Atualizar gráfico de receita
+      revenueChart.data.labels = data.revenue_chart.labels;
+      revenueChart.data.datasets[0].data = data.revenue_chart.data;
+      revenueChart.update();
+      
+      // Atualizar gráfico de distribuição de serviços
+      servicesChart.data.labels = data.services_chart.labels;
+      servicesChart.data.datasets[0].data = data.services_chart.data;
+      servicesChart.update();
+      
+      // Atualizar gráfico de agendamentos por dia da semana
+      weekdayChart.data.datasets[0].data = data.weekday_chart.data;
+      weekdayChart.update();
+      
+      // Atualizar gráfico de planos vendidos
+      plansChart.data.labels = data.plans_chart.labels;
+      plansChart.data.datasets[0].data = data.plans_chart.data;
+      plansChart.update();
+    }
+    
+    // Função para renderizar tabela de agendamentos (em um sistema real)
+    function renderAppointmentsTable(appointments) {
+      const appointmentsList = document.getElementById('appointmentsList');
+      appointmentsList.innerHTML = '';
+      
+      let total = 0;
+      
+      appointments.forEach(appointment => {
+        // Formatar data
+        const appointmentDate = new Date(appointment.appointment_date);
+        const formattedDate = appointmentDate.toLocaleDateString('pt-BR');
+        
+        // Formatar valor
+        const formattedPrice = appointment.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        
+        // Definir status
+        let statusClass = '';
+        let statusText = '';
+        
+        switch (appointment.status) {
+          case 'completed':
+            statusClass = 'bg-success';
+            statusText = 'Concluído';
+            break;
+          case 'cancelled':
+            statusClass = 'bg-danger';
+            statusText = 'Cancelado';
+            break;
+        }
+        
+        // Criar linha da tabela
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${formattedDate}</td>
+          <td>${appointment.user.name}</td>
+          <td>${appointment.pet.name} (${appointment.pet.breed})</td>
+          <td>${appointment.service.name}</td>
+          <td>${formattedPrice}</td>
+          <td><span class="badge ${statusClass}">${statusText}</span></td>
+        `;
+        
+        appointmentsList.appendChild(row);
+        
+        // Somar ao total se o agendamento foi concluído
+        if (appointment.status === 'completed') {
+          total += appointment.price;
+        }
+      });
+      
+      // Atualizar total
+      document.querySelector('tfoot tr td:nth-of-type(2)').textContent = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+    
+    // Função para renderizar tabela de planos (em um sistema real)
+    function renderPlansTable(plans) {
+      const plansList = document.getElementById('plansList');
+      plansList.innerHTML = '';
+      
+      let total = 0;
+      
+      plans.forEach(plan => {
+        // Formatar data
+        const purchaseDate = new Date(plan.purchase_date);
+        const formattedDate = purchaseDate.toLocaleDateString('pt-BR');
+        
+        // Formatar valor
+        const formattedPrice = plan.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        
+        // Criar linha da tabela
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${formattedDate}</td>
+          <td>${plan.user.name}</td>
+          <td>${plan.plan.name}</td>
+          <td>${formattedPrice}</td>
+        `;
+        
+        plansList.appendChild(row);
+        
+        // Somar ao total
+        total += plan.price;
+      });
+      
+      // Atualizar total
+      document.querySelector('tfoot tr td:nth-of-type(2)').textContent = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+    
+    // Função para exportar agendamentos (em um sistema real)
+    function exportAppointments() {
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      
+      fetch(`/api/admin/reports/appointments/export?start_date=${startDate}&end_date=${endDate}`, {
+        headers: {
+          'Authorization': `Bearer ${getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.blob();
+        } else {
+          throw new Error('Erro ao exportar agendamentos');
+        }
+      })
+      .then(blob => {
+        // Criar link para download
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'agendamentos_amor_pet.csv';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para exportar planos (em um sistema real)
+    function exportPlans() {
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      
+      fetch(`/api/admin/reports/plans/export?start_date=${startDate}&end_date=${endDate}`, {
+        headers: {
+          'Authorization': `Bearer ${getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.blob();
+        } else {
+          throw new Error('Erro ao exportar planos');
+        }
+      })
+      .then(blob => {
+        // Criar link para download
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'planos_vendidos_amor_pet.csv';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para obter token (em um sistema real)
+    function getToken() {
+      return localStorage.getItem('token');
+    }
+  </script>
+</body>
+</html>

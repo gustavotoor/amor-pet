@@ -1,0 +1,36 @@
+/* Estilos adicionais para produção */
+.production-notice {
+  background-color: #A8D5BA;
+  color: #333;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 12px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Otimizações de performance */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Melhorias de acessibilidade */
+:focus {
+  outline: 2px solid #F4A261;
+}
+
+/* Melhorias para dispositivos móveis */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

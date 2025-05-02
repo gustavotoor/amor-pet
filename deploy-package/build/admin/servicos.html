@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serviços - Administração Amor Pet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../images/logo.svg" alt="Amor Pet" class="logo">
+        <h1>Administração</h1>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="agendamentos.html"><i class="fas fa-calendar-alt"></i> Agendamentos</a>
+          </li>
+          <li>
+            <a href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+          </li>
+          <li class="active">
+            <a href="servicos.html"><i class="fas fa-concierge-bell"></i> Serviços</a>
+          </li>
+          <li>
+            <a href="planos.html"><i class="fas fa-tags"></i> Planos</a>
+          </li>
+          <li>
+            <a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
+          </li>
+          <li>
+            <a href="configuracoes.html"><i class="fas fa-cog"></i> Configurações</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="admin-content">
+      <header class="content-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h2>Serviços</h2>
+        </div>
+        <div class="header-right">
+          <div class="admin-profile">
+            <span id="adminName">Admin</span>
+            <img src="../images/admin-avatar.png" alt="Admin" class="avatar">
+          </div>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- Botão para adicionar serviço -->
+        <div class="d-flex justify-content-end mb-4">
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#serviceModal">
+            <i class="fas fa-plus"></i> Adicionar Serviço
+          </button>
+        </div>
+        
+        <!-- Lista de Serviços -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Serviços Disponíveis</h3>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Duração (min)</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="servicesList">
+                  <tr>
+                    <td>1</td>
+                    <td>Banho</td>
+                    <td>Banho completo com shampoo e condicionador especiais</td>
+                    <td>R$ 50,00</td>
+                    <td>60</td>
+                    <td><span class="badge bg-success">Ativo</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary edit-btn" data-id="1" data-bs-toggle="modal" data-bs-target="#serviceModal" title="Editar"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-outline-danger delete-btn" data-id="1" title="Excluir"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Banho e Tosa</td>
+                    <td>Banho completo com tosa higiênica ou tosa da raça</td>
+                    <td>R$ 80,00</td>
+                    <td>90</td>
+                    <td><span class="badge bg-success">Ativo</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary edit-btn" data-id="2" data-bs-toggle="modal" data-bs-target="#serviceModal" title="Editar"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-outline-danger delete-btn" data-id="2" title="Excluir"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Banho Premium</td>
+                    <td>Banho com produtos premium e hidratação especial</td>
+                    <td>R$ 70,00</td>
+                    <td>75</td>
+                    <td><span class="badge bg-success">Ativo</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary edit-btn" data-id="3" data-bs-toggle="modal" data-bs-target="#serviceModal" title="Editar"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-outline-danger delete-btn" data-id="3" title="Excluir"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Tosa Higiênica</td>
+                    <td>Tosa apenas nas áreas higiênicas do pet</td>
+                    <td>R$ 40,00</td>
+                    <td>45</td>
+                    <td><span class="badge bg-secondary">Inativo</span></td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary edit-btn" data-id="4" data-bs-toggle="modal" data-bs-target="#serviceModal" title="Editar"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-outline-danger delete-btn" data-id="4" title="Excluir"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal de Serviço -->
+  <div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="serviceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="serviceModalLabel">Adicionar Serviço</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="serviceForm">
+            <input type="hidden" id="serviceId">
+            <div class="mb-3">
+              <label for="serviceName" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="serviceName" required>
+            </div>
+            <div class="mb-3">
+              <label for="serviceDescription" class="form-label">Descrição</label>
+              <textarea class="form-control" id="serviceDescription" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="servicePrice" class="form-label">Preço (R$)</label>
+              <input type="number" class="form-control" id="servicePrice" min="0" step="0.01" required>
+            </div>
+            <div class="mb-3">
+              <label for="serviceDuration" class="form-label">Duração (minutos)</label>
+              <input type="number" class="form-control" id="serviceDuration" min="15" step="5" required>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="serviceActive" checked>
+              <label class="form-check-label" for="serviceActive">Ativo</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="saveServiceBtn">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação -->
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmModalLabel">Confirmar Exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body" id="confirmModalBody">
+          Tem certeza que deseja excluir este serviço? Esta ação não pode ser desfeita.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle sidebar
+      document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.querySelector('.admin-layout').classList.toggle('sidebar-collapsed');
+      });
+      
+      // Logout button
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        // Em um sistema real, aqui seria feito o logout
+        window.location.href = '../login.html';
+      });
+      
+      // Dados de serviços (simulação)
+      const services = [
+        {
+          id: 1,
+          name: 'Banho',
+          description: 'Banho completo com shampoo e condicionador especiais',
+          price: 50.00,
+          duration: 60,
+          active: true
+        },
+        {
+          id: 2,
+          name: 'Banho e Tosa',
+          description: 'Banho completo com tosa higiênica ou tosa da raça',
+          price: 80.00,
+          duration: 90,
+          active: true
+        },
+        {
+          id: 3,
+          name: 'Banho Premium',
+          description: 'Banho com produtos premium e hidratação especial',
+          price: 70.00,
+          duration: 75,
+          active: true
+        },
+        {
+          id: 4,
+          name: 'Tosa Higiênica',
+          description: 'Tosa apenas nas áreas higiênicas do pet',
+          price: 40.00,
+          duration: 45,
+          active: false
+        }
+      ];
+      
+      // Modal de serviço
+      const serviceModal = document.getElementById('serviceModal');
+      const serviceModalLabel = document.getElementById('serviceModalLabel');
+      const serviceForm = document.getElementById('serviceForm');
+      const serviceId = document.getElementById('serviceId');
+      const serviceName = document.getElementById('serviceName');
+      const serviceDescription = document.getElementById('serviceDescription');
+      const servicePrice = document.getElementById('servicePrice');
+      const serviceDuration = document.getElementById('serviceDuration');
+      const serviceActive = document.getElementById('serviceActive');
+      const saveServiceBtn = document.getElementById('saveServiceBtn');
+      
+      // Resetar formulário ao abrir o modal para adicionar
+      serviceModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
+        
+        // Se não for um botão de edição, é um botão de adicionar
+        if (!button || !button.classList.contains('edit-btn')) {
+          serviceModalLabel.textContent = 'Adicionar Serviço';
+          serviceForm.reset();
+          serviceId.value = '';
+          return;
+        }
+        
+        // Se for um botão de edição, preencher o formulário com os dados do serviço
+        const id = button.getAttribute('data-id');
+        const service = services.find(s => s.id == id);
+        
+        if (service) {
+          serviceModalLabel.textContent = 'Editar Serviço';
+          serviceId.value = service.id;
+          serviceName.value = service.name;
+          serviceDescription.value = service.description;
+          servicePrice.value = service.price;
+          serviceDuration.value = service.duration;
+          serviceActive.checked = service.active;
+        }
+      });
+      
+      // Salvar serviço
+      saveServiceBtn.addEventListener('click', function() {
+        // Verificar se o formulário é válido
+        if (!serviceForm.checkValidity()) {
+          serviceForm.reportValidity();
+          return;
+        }
+        
+        // Obter dados do formulário
+        const id = serviceId.value;
+        const name = serviceName.value;
+        const description = serviceDescription.value;
+        const price = parseFloat(servicePrice.value);
+        const duration = parseInt(serviceDuration.value);
+        const active = serviceActive.checked;
+        
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // para salvar o serviço
+        
+        if (id) {
+          // Editar serviço existente
+          // updateService(id, { name, description, price, duration, active });
+          console.log('Editando serviço:', { id, name, description, price, duration, active });
+        } else {
+          // Adicionar novo serviço
+          // createService({ name, description, price, duration, active });
+          console.log('Adicionando serviço:', { name, description, price, duration, active });
+        }
+        
+        // Fechar o modal
+        bootstrap.Modal.getInstance(serviceModal).hide();
+        
+        // Mostrar mensagem de sucesso
+        alert(id ? 'Serviço atualizado com sucesso!' : 'Serviço adicionado com sucesso!');
+        
+        // Em um sistema real, aqui seria recarregada a lista de serviços
+        // fetchServices();
+      });
+      
+      // Botões de excluir serviço
+      document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          const service = services.find(s => s.id == id);
+          
+          if (service) {
+            // Configurar modal de confirmação
+            document.getElementById('confirmModalBody').textContent = `Tem certeza que deseja excluir o serviço "${service.name}"? Esta ação não pode ser desfeita.`;
+            
+            // Configurar botão de confirmação
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            confirmDeleteBtn.setAttribute('data-id', id);
+            
+            // Abrir modal de confirmação
+            new bootstrap.Modal(document.getElementById('confirmModal')).show();
+          }
+        });
+      });
+      
+      // Confirmar exclusão de serviço
+      document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+        const id = this.getAttribute('data-id');
+        
+        // Em um sistema real, aqui seria feita a requisição para a API
+        // para excluir o serviço
+        
+        // deleteService(id);
+        console.log('Excluindo serviço:', id);
+        
+        // Fechar o modal
+        bootstrap.Modal.getInstance(document.getElementById('confirmModal')).hide();
+        
+        // Mostrar mensagem de sucesso
+        alert('Serviço excluído com sucesso!');
+        
+        // Em um sistema real, aqui seria recarregada a lista de serviços
+        // fetchServices();
+      });
+    });
+    
+    // Função para buscar serviços (em um sistema real)
+    function fetchServices() {
+      fetch('/api/admin/services', {
+        headers: {
+          'Authorization': `Bearer ${getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao buscar serviços');
+        }
+      })
+      .then(services => {
+        renderServices(services);
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para renderizar serviços (em um sistema real)
+    function renderServices(services) {
+      const servicesList = document.getElementById('servicesList');
+      servicesList.innerHTML = '';
+      
+      if (services.length === 0) {
+        servicesList.innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center py-4">
+              <div class="empty-state">
+                <i class="fas fa-concierge-bell fa-3x mb-3 text-muted"></i>
+                <h4>Nenhum serviço encontrado</h4>
+                <p class="text-muted">Adicione serviços para começar</p>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+      
+      services.forEach(service => {
+        // Formatar preço
+        const formattedPrice = service.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        
+        // Criar linha da tabela
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${service.id}</td>
+          <td>${service.name}</td>
+          <td>${service.description || '-'}</td>
+          <td>${formattedPrice}</td>
+          <td>${service.duration}</td>
+          <td><span class="badge ${service.active ? 'bg-success' : 'bg-secondary'}">${service.active ? 'Ativo' : 'Inativo'}</span></td>
+          <td>
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-outline-primary edit-btn" data-id="${service.id}" data-bs-toggle="modal" data-bs-target="#serviceModal" title="Editar"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-outline-danger delete-btn" data-id="${service.id}" title="Excluir"><i class="fas fa-trash"></i></button>
+            </div>
+          </td>
+        `;
+        
+        servicesList.appendChild(row);
+      });
+      
+      // Reconfigurar botões de ação
+      setupActionButtons();
+    }
+    
+    // Função para configurar botões de ação (em um sistema real)
+    function setupActionButtons() {
+      // Botões de editar
+      document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          // O modal será preenchido pelo evento show.bs.modal
+        });
+      });
+      
+      // Botões de excluir
+      document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          
+          // Buscar serviço
+          fetch(`/api/admin/services/${id}`, {
+            headers: {
+              'Authorization': `Bearer ${getToken()}`
+            }
+          })
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Erro ao buscar serviço');
+            }
+          })
+          .then(service => {
+            // Configurar modal de confirmação
+            document.getElementById('confirmModalBody').textContent = `Tem certeza que deseja excluir o serviço "${service.name}"? Esta ação não pode ser desfeita.`;
+            
+            // Configurar botão de confirmação
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            confirmDeleteBtn.setAttribute('data-id', id);
+            
+            // Abrir modal de confirmação
+            new bootstrap.Modal(document.getElementById('confirmModal')).show();
+          })
+          .catch(error => {
+            console.error('Erro:', error);
+            alert(error.message);
+          });
+        });
+      });
+    }
+    
+    // Função para criar serviço (em um sistema real)
+    function createService(data) {
+      fetch('/api/admin/services', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao criar serviço');
+        }
+      })
+      .then(data => {
+        alert('Serviço criado com sucesso!');
+        fetchServices();
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para atualizar serviço (em um sistema real)
+    function updateService(id, data) {
+      fetch(`/api/admin/services/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao atualizar serviço');
+        }
+      })
+      .then(data => {
+        alert('Serviço atualizado com sucesso!');
+        fetchServices();
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para excluir serviço (em um sistema real)
+    function deleteService(id) {
+      fetch(`/api/admin/services/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${getToken()}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao excluir serviço');
+        }
+      })
+      .then(data => {
+        alert('Serviço excluído com sucesso!');
+        fetchServices();
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert(error.message);
+      });
+    }
+    
+    // Função para obter token (em um sistema real)
+    function getToken() {
+      return localStorage.getItem('token');
+    }
+  </script>
+</body>
+</html>

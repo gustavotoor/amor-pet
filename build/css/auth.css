@@ -1,0 +1,167 @@
+/**
+ * Estilos específicos para as páginas de autenticação do sistema Amor Pet
+ * 
+ * Este arquivo contém os estilos CSS para as páginas de login, cadastro e recuperação de senha,
+ * seguindo a paleta de cores definida e garantindo responsividade.
+ */
+
+/* Variáveis de cores (repetidas do styles.css para garantir consistência) */
+:root {
+  --primary: #A8D5BA;     /* Verde-água */
+  --secondary: #B3D4E5;   /* Azul claro */
+  --neutral: #F5E8C7;     /* Bege */
+  --accent: #F4A261;      /* Laranja suave */
+  --white: #FFFFFF;
+  --dark: #333333;
+  --light-gray: #F8F9FA;
+  --gray: #6C757D;
+}
+
+/* Estilos para a página de autenticação */
+.auth-page {
+  background-color: var(--neutral);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.auth-container {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.auth-header {
+  margin-bottom: 30px;
+}
+
+.auth-logo {
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.auth-header h1 {
+  font-size: 1.8rem;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.auth-form {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.25rem rgba(168, 213, 186, 0.25);
+}
+
+.form-check-input:checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.forgot-password {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: #e76f51;
+  text-decoration: underline;
+}
+
+/* Separador "ou" */
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.separator span {
+  padding: 0 10px;
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+/* Botão do Google */
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--white);
+  border-color: #dee2e6;
+  color: var(--dark);
+  transition: all 0.3s ease;
+}
+
+.google-btn:hover {
+  background-color: #f8f9fa;
+  border-color: #c8c9ca;
+}
+
+.google-btn img {
+  margin-right: 5px;
+}
+
+/* Rodapé do formulário */
+.auth-footer {
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+.auth-footer a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+  color: #97c4a9;
+  text-decoration: underline;
+}
+
+/* Botão de mostrar/ocultar senha */
+.toggle-password {
+  border-color: #ced4da;
+}
+
+.toggle-password:hover {
+  background-color: #f8f9fa;
+}
+
+/* Responsividade */
+@media (max-width: 576px) {
+  .auth-container {
+    padding: 30px 20px;
+    margin: 0 15px;
+  }
+  
+  .auth-logo {
+    height: 50px;
+  }
+  
+  .auth-header h1 {
+    font-size: 1.5rem;
+  }
+}
